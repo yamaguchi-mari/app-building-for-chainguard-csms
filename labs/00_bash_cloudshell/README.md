@@ -17,13 +17,28 @@
 ##### Make a new directory to house your coursework
 
 ```shell
-mkdir ~/snyky
+mkdir ~/chainguard-app-building
 ```
 
 *Explanation:*
 - `mkdir` is the command to make a new directory
-- `~` (tildae) is shorthand for your home directory: `/home/your_user_name`
-- `snyky` is the new directory we're creating.  `~/snyky` is the full path of the new directory.  It extrapolates to `/home/your_user_name/snyky`
+- `~` (tildae) is shorthand for your home directory: 
+
+for MACOS:
+`/Users/your_user_name` 
+
+or 
+
+For Linux OS:
+`/home/your_user_name` for Linux
+
+- `chainguard-app-building` is the new directory we're creating.  `~/chainguard-app-building` is the full path of the new directory.  Again the tildae (~) is short-hand for /Users/your_user_name so...
+
+`/Users/your_user_name/chainguard-app-building` 
+
+is the same thing as...
+
+`~/chainguard-app-building`
 
 
 ---
@@ -50,9 +65,10 @@ mkdir ~/snyky
 
 > ### Other tips that helped me understand the difference between the above 3 types of things^^^
 >
-> - Full Operating Systems need to manage MANY services running on a computer, container systems run FEWER
-> - Operating systems use File Systems (as depicted in the above graphic) to run service/processes (reading from, and writing to files)
-> - Linux uses System-D for this, Mac-OS uses [Launch-D](https://medium.com/swlh/how-to-use-launchd-to-run-services-in-macos-b972ed1e352), Windows uses Service Control Manager / Task Manager... and Containers use Docker (or podman or container-d)
+> - Full Operating Systems (physical and VMs) run many services on a given computer
+> - Container systems run fewer services
+> - Operating systems use File Systems (as depicted in the graphic below) to run services/processes (reading and writing to files)
+>   - Linux uses System-D for this, Mac-OS uses [Launch-D](https://medium.com/swlh/how-to-use-launchd-to-run-services-in-macos-b972ed1e352), Windows uses Service Control Manager / Task Manager... and Containers use Docker (or podman or container-d)
 > - Services are just files - compiled binary programs are files (files that can write to other binaries (databases) or plain files)
 > -The binaries are stored in the sub-folders of the File System (whatever thing it may be running in)
 > - You can add your own binaries and plain text files to the file system
@@ -60,14 +76,14 @@ mkdir ~/snyky
 > #### ^^^ Understanding the above helps for trouble-shooting - you'll see file/folder references a LOT in debug output commands
 
 No matter where your app is or what form-factor it is using (HW, VM, Container), it will be using a file system...
-![image](devops-fs.png?)
+![image](file-systems-all-the-way-down.png?)
 
 ---
 #### Absolute vs relative paths
 
 *Absolute:* Navigate from a fixed point (root)
 
-*Relative:* Navigate from wherever you are in the directory
+*Relative:* Navigate from where you are in the directory (your user's active working directory)
 
 Btw, where *am* I in the directory?
 
@@ -80,14 +96,23 @@ pwd
 If you have not changed directories yet, you should still be in your "home" directory and the result of the command will look like this: 
 
 ```bash
+# on MACOS...
 /Users/anthonysayre
 ```
+ 
+or this...
+
+```bash
+# on most Linux OS...
+/Home/anthonysayre
+```
+
 
 Ensure you are in your "home" directory and make a new sub-directory in it
 
 ```shell
 cd ~
-mkdir snyky
+mkdir chainguard-app-building
 ```
 
 #### Navigate to the new directory (`cd` command)
@@ -95,11 +120,11 @@ mkdir snyky
 
 ```shell
 # Use the full path
-cd ~/snyky
+cd ~/chainguard-app-building
 # or
-cd /home/$USER/snyky
+cd /home/$USER/chainguard-app-building
 # or
-cd $HOME/snyky
+cd $HOME/chainguard-app-building
 
 # Use the relative path
 # First, make sure you're in your home directory
@@ -107,19 +132,69 @@ cd
 # or
 cd ~
 # Second, use the relative path to get to your new directory
-cd snyky
-# or try
-cd sn # and before you hit 'enter', press your 'tab' key once or twice.
+cd chainguard-app-building
+
+# Use tab completion. Type a part of the word "chainguard"...
+cd chaing # before you hit 'enter', press 'tab' key
 ```
 
 *Explanation:*
-- You can use the full path (as long as it's correct) to get to any directory on your filesystem
-- A relative path is ... relative ... to your current location in the filesystem
-- Tab autocompletion is fantastic.  Play with it.
-- Note that the shell environment gives us a bunch of variables by default.  `$USER` is one such variable.  You can see others with the `env` command.
+- Use the absolute path to get *from root* to any directory or file on your filesystem
+- Use the relative path to get *from your users current working directory* to any directory or file
+- Tab autocompletion is highly recommended
+- Note that the shell environment gives us many variables by default.  `$USER` is one such variable:
+
+> command:
+> ```bash
+echo $USER 
+```
+
+results:
+```bash
+anthony.sayre
+```
+
+
+You can see all the environment variables with the `env` command:
+
+command:
+```bash
+env
+```
+
+result:
+```bash
+__CFBundleIdentifier=com.apple.Terminal
+TMPDIR=/var/folders/tx/mc65575x5ll5k7_y70mmdbyw0000gn/T/
+XPC_FLAGS=0x0
+LaunchInstanceID=5947A3B0-4DE5-4FD9-A204-EA0F32CCEE90
+TERM=xterm-256color
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.5K6SiNW5Wd/Listeners
+SECURITYSESSIONID=186b5
+XPC_SERVICE_NAME=0
+TERM_PROGRAM=Apple_Terminal
+TERM_PROGRAM_VERSION=455.1
+TERM_SESSION_ID=A8D55C57-3192-4D91-B042-46D430109353
+SHELL=/bin/zsh
+HOME=/Users/anthony.sayre
+LOGNAME=anthony.sayre
+USER=anthony.sayre
+PATH=/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/usr/local/go/bin:/Users/anthony.sayre/go/bin
+SHLVL=1
+PWD=/Users/anthony.sayre/git/app-building-for-chainguard-tsms
+OLDPWD=/Users/anthony.sayre/git
+HOMEBREW_PREFIX=/opt/homebrew
+HOMEBREW_CELLAR=/opt/homebrew/Cellar
+HOMEBREW_REPOSITORY=/opt/homebrew
+INFOPATH=/opt/homebrew/share/info:
+LANG=en_US.UTF-8
+_=/usr/bin/env
+
+```
 
 *A Quick Note on Variables:*
-- `$` indicates that we want the *value* of the variable here.
+- Dollar sign -->   `$` indicates that we want the *value* of the variable here:
+  - `echo $Your_Variable_Here`
 - `NAME=Frodo` sets `$NAME` to `Frodo`
 - Unlike many programming languages, most shells require **no spaces** around the `=`
 
@@ -170,21 +245,21 @@ echo $MACGUFFIN
 
 ---
 
-#### snyk at command line
+#### Chainguard at command line
 
-Ensure Snyk CLI is [installed locally](https://docs.snyk.io/snyk-cli/install-the-snyk-cli)
+Ensure chainctl is [installed locally](https://edu.chainguard.dev/chainguard/chainctl-usage/how-to-install-chainctl/)
 
 [WIP]
 
 Understanding these concepts can help with troubleshooting
-> #### [Story about Snyk license to text tool](https://github.com/snyk-tech-services/snyk-licenses-texts)
+> #### [install a chainguard tool manually](https://)
 
 ```shell
 
 # the path env variable
 env
 cat ~/.zshrc
-# helped me get Snyk license to text tool up and running on a system where it did not work properly out of the box
+# helped me get Chainguard license to text tool up and running on a system where it did not work properly out of the box
 
 ```
 [/WIP]
@@ -198,23 +273,23 @@ cat ~/.zshrc
 
 ##### An Unusual Class Convention
 
-In this class, you will find instructions like this:
+> In this class, you will find instructions like this:
 
 ```shell
-touch ~/snyky/mywebserver/deploy/Chart.yaml
+touch ~/chainguard-app-building/mywebserver/deploy/Chart.yaml
 ```
-This command should fail because the subdirectory 'mywebserver' has not been created yet
+> This command should fail because the subdirectory 'mywebserver' has not been created yet
 
-You can still do this with one line ('mkdir' to make that subdirectory and append the 'touch' command to it with '&&':
+> You can do two commands on a single terminal command by using '&&'. The below compound command is a combo of `mkdir` and `touch` commands:
 
 ```bash
-mkdir -p ~/snyky/mywebserver/deploy/ && touch ~/snyky/mywebserver/deploy/Chart.yaml
+mkdir -p ~/chainguard-app-building/mywebserver/deploy/ && touch ~/chainguard-app-building/mywebserver/deploy/Chart.yaml
 ```
 
-The command should work this time (the `-p` in the above command allows us to make a multi-level directory structure)
+The command should work this time
 
 ```bash
-open -a TextEdit ~/snyky/mywebserver/deploy/Chart.yaml
+open -a TextEdit ~/chainguard-app-building/mywebserver/deploy/Chart.yaml
 ```
 
 We used absolute paths for this
@@ -226,14 +301,14 @@ If you prefer to type instead of copy/paste, something like this will yield the 
 Use 'tab' to navigate through the `cd` command....
 
 ```shell
-cd ~/snyky/mywebserver/deploy
+cd ~/chainguard-app-building/mywebserver/deploy
 touch Chart.yaml
 open -a TextEdit Chart.yaml
 ```
 
 ##### Tildae
 - In Bash, `~` is a shortcut meaning "this user's home directory"
-- So when the user `fbaggins` is logged in to a system, `mkdir ~/snyky` is a shortcut for `mkdir /home/fbaggins/snyky`.  (Probably.  Frodo's home directory could be somewhere else.)
+- So when the user `fbaggins` is logged in to a system, `mkdir ~/chainguard-app-building` is a shortcut for `mkdir /home/fbaggins/chainguard-app-building`.  (Probably.  Frodo's home directory could be somewhere else.)
 
 ### Command tricks
 
