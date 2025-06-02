@@ -197,8 +197,28 @@ _=/usr/bin/env
 *Dollar sign $:*
 - Dollar sign -->   `$` indicates that we want the *value* of the variable here:
   - `echo $Your_Variable_Here`
-- `NAME=Frodo` sets `$NAME` to `Frodo`
-- Unlike many programming languages, most shells require **no spaces** around the `=`
+- Example, create a custom variable of your own for this envirionment, go to your z-shell terminal and type this:
+
+```bash
+NAME=Frodo
+```
+
+This sets `$NAME` to `Frodo`
+
+Ensure it worked:
+
+command:
+
+```bash
+echo $NAME
+```
+
+result:
+
+```bash
+Frodo
+```
+
 
 ##### Examine the new directory
 
