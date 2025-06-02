@@ -29,8 +29,8 @@ for MACOS:
 
 or 
 
-For Linux OS:
-`/home/your_user_name` for Linux
+for Linux OS:
+`/home/your_user_name`
 
 - `chainguard-app-building` is the new directory we're creating.  `~/chainguard-app-building` is the full path of the new directory.  Again the tildae (~) is short-hand for /Users/your_user_name so...
 
