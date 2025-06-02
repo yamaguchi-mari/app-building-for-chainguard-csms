@@ -144,20 +144,22 @@ cd chaing # before you hit 'enter', press 'tab' key
 - Tab autocompletion is highly recommended
 - Note that the shell environment gives us many variables by default.  `$USER` is one such variable:
 
-> command:
-> ```bash
+command:
+
+```bash
 echo $USER 
 ```
 
 results:
+
 ```bash
 anthony.sayre
 ```
 
-
 You can see all the environment variables with the `env` command:
 
 command:
+
 ```bash
 env
 ```
@@ -192,7 +194,7 @@ _=/usr/bin/env
 
 ```
 
-*A Quick Note on Variables:*
+*Dollar sign $:*
 - Dollar sign -->   `$` indicates that we want the *value* of the variable here:
   - `echo $Your_Variable_Here`
 - `NAME=Frodo` sets `$NAME` to `Frodo`
