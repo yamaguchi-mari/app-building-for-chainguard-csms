@@ -76,7 +76,7 @@ is the same thing as...
 > #### ^^^ Understanding the above helps for trouble-shooting - you'll see file/folder references a LOT in debug output commands
 
 No matter where your app is or what form-factor it is using (HW, VM, Container), it will be using a file system...
-![image](file-systems-all-the-way-down.png?)
+![image](filesystems-allthewaydown.png?)
 
 ---
 #### Absolute vs relative paths
