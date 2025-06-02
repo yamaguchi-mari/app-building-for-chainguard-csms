@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebserver-{{ .Values.environment }}
+  labels:
+    app: webserver
+    course: introtodevops
+    environment: {{ .Values.environment }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webserver
+      course: introtodevops
+      environment: {{ .Values.environment }}
+  template:
+    metadata:
+      labels:
+        app: webserver
+        course: introtodevops
+        environment: {{ .Values.environment }}
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: webserver
+          image: {{ .Values.image }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: default
+              containerPort: 80
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mywebserver-{{ .Values.environment }}
+  labels:
+    app: webserver
+    course: introtodevops
+    environment: {{ .Values.environment }}
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: default
+      protocol: TCP
+      name: svcport
+  selector:
+    app: webserver
+    course: introtodevops
+    environment: {{ .Values.environment }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mywebserver-{{ .Values.environment }}
+  labels:
+    app: webserver
+    course: introtodevops
+    environment: {{ .Values.environment }}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: {{ .Values.host }}
+    http:
+      paths:
+      - path: /
+        pathType: Exact
+        backend:
+          service:
+            name: mywebserver-{{ .Values.environment }}
+            port:
+              name: svcport

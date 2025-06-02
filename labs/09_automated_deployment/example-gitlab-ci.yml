@@ -1,0 +1,53 @@
+# Add stages beyond the defaults
+stages:
+  - build
+  - prepare-dev
+  - deploy-dev
+
+# Same build and test as before
+build_and_test_webserver:
+  stage: build
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - docker build -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA} -t ${CI_REGISTRY_IMAGE}:latest .
+    - docker run -d -p8080:80 --name mywebserver ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}
+    - docker logs mywebserver
+    - apk add curl
+    - curl docker:8080
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker push ${CI_REGISTRY_IMAGE}
+    - echo ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}
+
+# Use a `helm-kubectl` image to render the manifest
+render_manifest:
+  stage: prepare-dev
+  image: dtzar/helm-kubectl
+  variables:
+    INGRESS_HOST: dev.${MACGUFFIN}.introtodevops.com
+    K8S_ENVIRONMENT: dev
+  # Collect the manifest from this job
+  artifacts:
+    paths:
+      - manifest.yaml
+  script:
+    - >
+      helm template \
+        --set image=${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA} \
+        --set host=${INGRESS_HOST} \
+        --set environment=${K8S_ENVIRONMENT} \
+        deploy > manifest.yaml
+
+deploy_webserver:
+  stage: deploy-dev
+  image: weaveworks/eksctl
+  variables:
+    CLUSTER: ${MACGUFFIN}-k8s-cluster
+  before_script:
+    # Authenticate to the cluster
+    # This uses the AWS* variables in the background
+    - aws eks update-kubeconfig --name ${CLUSTER} --region ${AWS_DEFAULT_REGION}
+  script:
+    # The manifest will be collected from the previous job
+    - kubectl apply -f manifest.yaml
