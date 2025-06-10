@@ -38,7 +38,7 @@ I encourage all students to experiment and explore the material.  Making it your
 
 ### 01a. [Chainguard and CI](/labs/01a_chainguard_ci)
 
-> End of updated content (A. Sayre - Sept 2022)
+> End of updated content (A. Sayre - June 2025)
 
 ### 02. [WIP! Not updated! Docker](/labs/02_docker)
 
