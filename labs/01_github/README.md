@@ -470,5 +470,5 @@ If you're a really good instruction-follower, your `~/snyky` directory tree shou
 
 ---
 
-| Previous: [Bash](/labs/00_bash_cloudshell) | Next: [Snyk and CI](/labs/01a_snyk_ci) |
+| Previous: [Bash](/labs/00_bash_cloudshell) | Next: [Chainguard and CI](/labs/01a_chainguard_ci) |
 |-------------------------------------------:|:---------------------------------------|
