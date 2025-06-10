@@ -35,9 +35,9 @@ I encourage all students to experiment and explore the material.  Making it your
 
 ### 00. [Bash](/labs/00_bash_cloudshell)
 
-### 01. [GitLab](/labs/01_gitlab)
+### 01. [GitHub](/labs/01_github)
 
-### 01a. [Snyk and CI](/labs/01a_snyk_ci)
+### 01a. [Chainguard and CI](/labs/01a_chainguard_ci)
 
 > End of updated content (A. Sayre - Sept 2022)
 
