@@ -1,4 +1,4 @@
-# GitLab
+# GitHub
 
 *By the end of this lab, you will:*
 1. Setup SSH keys and use them to configure gitlab
