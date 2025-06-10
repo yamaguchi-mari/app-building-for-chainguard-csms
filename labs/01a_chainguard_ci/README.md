@@ -1,4 +1,4 @@
-# Snyk and CI
+# Chainguard and CI
 
 *By the end of this lab, you will:*
 
@@ -329,5 +329,5 @@ curl --include \
 
 > Once you have verified your commit SHA appears in the Snyk API using the above API endpoint, you have finished the lab!
 
-| Previous: [GitLab](/labs/01_gitlab) | Next: [WIP! Not updated! Docker](/labs/02_docker) |
+| Previous: [GitLab](/labs/01_github) | Next: [WIP! Not updated! Docker](/labs/02_docker) |
 |-------------------------------------------:|:--------------------------------------------------|
