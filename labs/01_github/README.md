@@ -210,11 +210,11 @@ cd mypracticerepo
 You should see this:
 
 ```
-anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/snyky$ git clone $(jq -r '.ssh_url_to_repo' repo_metadata.json)
+anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/chainguard-app-building$ git clone $(jq -r '.ssh_url_to_repo' repo_metadata.json)
 Cloning into 'mypracticerepo'...
 warning: You appear to have cloned an empty repository.
-anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/snyky$ cd mypracticerepo
-anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/snyky/mypracticerepo$
+anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/chainguard-app-building$ cd mypracticerepo
+anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/chainguard-app-building/mypracticerepo$
 ```
 
 ---
@@ -263,7 +263,7 @@ Make your first commit:
 
 ```bash
 # Get to the right spot
-cd ~/snyky/mypracticerepo
+cd ~/chainguard-app-building/mypracticerepo
 
 # Create a new file
 echo "hello world" > demofile
@@ -305,7 +305,7 @@ git push
 Navigate to your project and check out your file:
 
 ```bash
-jq -r '.web_url' ~/snyky/repo_metadata.json
+jq -r '.web_url' ~/chainguard-app-building/repo_metadata.json
 ```
 
 ^ Open the resulting URL in a browser
@@ -335,8 +335,8 @@ ls -l
 ### Create Your Own Git Project for local use
 
 ```bash
-mkdir ~/snyky/work-dir
-cd ~/snyky/work-dir
+mkdir ~/chainguard-app-building/work-dir
+cd ~/chainguard-app-building/work-dir
 git init
 ```
 
@@ -349,7 +349,7 @@ The `git init` line tells git to start tracking this folder as a repository.  It
 ### Clone an insecure website
 
 ```shell
-git clone https://github.com/snyk/snyk-goof.git ~/snyky/goof
+git clone git@github.com:Sayre-Tnunu/app-building-for-chainguard-tsms.git ~/chainguard-app-building/goof
 ```
 
 [NOTE]: Notice the above version of this git clone command has an extra piece added to the end ( ~/juiceshop).
@@ -365,7 +365,7 @@ curl \
   -d "initialize_with_readme=false" \
   -d "default_branch=main" \
   "https://gitlab.com/api/v4/projects" \
-  | tee ~/snyky/repo_metadata_goof.json
+  | tee ~/chainguard-app-building/repo_metadata_goof.json
 ```
 
 > **Q:** What did the **tee** command above just do?
@@ -375,7 +375,7 @@ Go to your GitLab UI and find the empty repo you just created
 ### Redirect the recently cloned GitHub repo to your newly created GitLab repo 
 
 ```shell
-cd ~/snyky/goof/
+cd ~/chainguard-app-building/goof/
 
 # check out the contents
 ls
@@ -384,7 +384,7 @@ ls
 git remote -v
 
 # change remote repo origin 
-git remote set-url origin $(jq -r '.ssh_url_to_repo' ~/snyky/repo_metadata_goof.json )
+git remote set-url origin $(jq -r '.ssh_url_to_repo' ~/chainguard-app-building/repo_metadata_goof.json )
 
 # reverify where the repo is now set to push to (should now show a GitLab repo instead of GitHub) 
 git remote -v
@@ -420,14 +420,14 @@ git diff
 
 Run tree command to get an overview
 
-`tree -F -L 2 ~/snyky` if you have `tree` installed.
+`tree -F -L 2 ~/chainguard-app-building` if you have `tree` installed.
 
 (To install `tree` on Mac: `brew install tree`)
 
-If you're a really good instruction-follower, your `~/snyky` directory tree should look something like this:
+If you're a really good instruction-follower, your `~/chainguard-app-building` directory tree should look something like this:
 
 ```
-/Users/anthonysayre/snyky/
+/Users/anthonysayre/chainguard-app-building/
 ├── goof/
 │   ├── Dockerfile
 │   ├── README.md
