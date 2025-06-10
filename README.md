@@ -4,22 +4,21 @@
 
 ### Class Goal
 
-DevOps is an exceptionally broad discipline.  It requires development expertise, operations sensibility, an immense capacity for troubleshooting, eagerness to learn, and - maybe most importantly - a broad base of knowledge around tools that can be stitched together to accomplish the goal.  
+Understand how Chainguard factory works
 
-This class will provide you with a very basic framework for workflow automation.  Every commit to a repo will be built, tested, and deployed.
-
-There is no Holy Grail - every environment is different.  This course attempts to use mostly free, open-source software to show that workflow automation is a real thing that can be done.  We'll cover one way to do it, but there are many, many other ways to accomplish the same thing.  (I've also done a GitHub --> CircleCI --> AWS/Mesos/Marathon setup that does something very similar to what we'll see in this course.)
+Be familiar with underlying concepts like bach commands, git, docker, package managers, and CI
 
 ---
 
 ### Prerequisites:
 
-- Before starting this class, you should have a basic familiarity with a Unix-like shell (sh, bash, zsh, ksh, etc.)
-- Laptop
+- Mac Laptop
   - A web browser - Chrome (or a Chrome-based browser like Brave) is probably best for this class
-- [Create a GitLab account](https://gitlab.com/users/sign_in)
-  - If you already have one, you can disregard this
-- A Snyk account
+- [Create a GitHub account if you don't already have one](https://github.com/login)
+  - Ensure it is connected to chainguard GH orgs
+- A Chainguard account
+- [A google cloud account (through chainguard)](https://console.cloud.google.com/)
+  - Ensure you have access to [Google Cloud Shell](https://shell.cloud.google.com/?hl=en_US&fromcloudshell=true&show=terminal)
 
 ***
 
