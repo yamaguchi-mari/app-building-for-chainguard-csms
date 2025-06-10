@@ -24,8 +24,8 @@ brew install git
 If you have not already, create a directory to house your work for today's class
 
 ```shell
-mkdir -p ~/snyky
-cd ~/snyky
+mkdir -p ~/chainguard-app-building
+cd ~/chainguard-app-building
 ```
 
 ---
@@ -99,7 +99,7 @@ cat ~/.ssh/id_rsa.pub
 You should see something like:
 
 ```
-ssh-rsa aBunchOfStuffHere!........................... osadmin@SFS-Eoan
+ssh-rsa aBunchOfStuffHere!...........................@AnthonySayres-MacBook-Pro.local
 ```
 
 ---
@@ -140,21 +140,21 @@ Add the following at the bottom of the file and save:
 
 ```bash
 # Don't add this token.  This is Teacher's.  Add YOUR token.
-export GITLAB_API_TOKEN="vzN...ycc"
+export GITHUB_API_TOKEN="vzN...ycc"
 ```
 
 Load your update and make sure you can see the token:
 
 ```bash
 source ~/.zshrc
-echo $GITLAB_API_TOKEN
+echo $GITHUB_API_TOKEN
 ```
 
 You should see this:
 
 ```
-osadmin@SFS-Eoan:~/sfs$ source ~/.zshrc
-osadmin@SFS-Eoan:~/sfs$ echo $GITLAB_API_TOKEN
+anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/sfs$ source ~/.zshrc
+anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/sfs$ echo $GITHUB_API_TOKEN
 vzN7Y2ynrydvo4WFNycc
 
 # You won't see this; you'll see YOUR token, right?  :)
@@ -166,19 +166,19 @@ vzN7Y2ynrydvo4WFNycc
 
 ---
 
-### GitLab API
+### GitHub API
 
 Use the GitLab API to create a new repository
 
 ```bash
 curl \
   -X POST \
-  -H "PRIVATE-TOKEN: ${GITLAB_API_TOKEN}" \
+  -H "PRIVATE-TOKEN: ${GITHUB_API_TOKEN}" \
   -d "name=MyPracticeRepo" \
   -d "initialize_with_readme=true" \
   -d "default_branch=main" \
-  "https://gitlab.com/api/v4/projects" \
-  | tee ~/snyky/repo_metadata.json
+  "https://github.com/api/v4/projects" \
+  | tee ~/chainguard-app-building/repo_metadata.json
 ```
 
  Piping that `curl` output to `tee` displays the results in the terminal as well as storing them in the `repo_metadata.json` file.  (We're going to use this file **a lot** throughout the rest of this class.) 
@@ -192,15 +192,15 @@ brew install jq
 With `jq`, the results are much more readable:
 
 ```bash
-cat ~/snyky/repo_metadata.json | jq
+cat ~/chainguard-app-building/repo_metadata.json | jq
 # or
-cat ~/snyky/repo_metadata.json | jq '.ssh_url_to_repo'
+cat ~/chainguard-app-building/repo_metadata.json | jq '.ssh_url_to_repo'
 ```
 
 Clone the repository locally:
 
 ```bash
-cd ~/snyky
+cd ~/chainguard-app-building
 git clone $(jq -r '.ssh_url_to_repo' repo_metadata.json) mypracticerepo
 # If you see the following prompt, type `yes`:
 #   Are you sure you want to continue connecting (yes/no)?
@@ -210,11 +210,11 @@ cd mypracticerepo
 You should see this:
 
 ```
-osadmin@SFS-Eoan:~/snyky$ git clone $(jq -r '.ssh_url_to_repo' repo_metadata.json)
+anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/snyky$ git clone $(jq -r '.ssh_url_to_repo' repo_metadata.json)
 Cloning into 'mypracticerepo'...
 warning: You appear to have cloned an empty repository.
-osadmin@SFS-Eoan:~/snyky$ cd mypracticerepo
-osadmin@SFS-Eoan:~/snyky/mypracticerepo$
+anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/snyky$ cd mypracticerepo
+anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/snyky/mypracticerepo$
 ```
 
 ---
