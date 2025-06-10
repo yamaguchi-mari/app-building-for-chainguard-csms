@@ -2,21 +2,21 @@
 
 *By the end of this lab, you will:*
 
-1. Know how to run a `snyk test` on a local npm project
-2. Have the same Snyk test written into a working Gitlab CI file
+1. Know how to run a `chainctl test` on a local npm project
+2. Have the same chainctl test written into a working Gitlab CI file
 
 #### Ensure you are in the correct directory:
 
 ```shell
-cd ~/Snyky/goof/
+cd ~/chainguard-app-building/goof/
 ```
 
-#### Running local snyk tests on a project
+#### Running local chainctl tests on a project
 
 Start with a simple test command:
 
 ```shell
-snyk test
+chainctl....
 ```
 
 Should fail with error message: `package not found http-signature`
@@ -33,13 +33,13 @@ Should fail with error message: `package not found http-signature`
     # should return many package update messages and then something like this at the end:
     ...
     > goof@1.0.1 prepare
-    > npm run snyk-protect
+    > npm run chainctl-protect
 
 
-    > goof@1.0.1 snyk-protect
-    > snyk protect
+    > goof@1.0.1 chainctl-protect
+    > chainctl protect
 
-    Successfully applied Snyk patches
+    Successfully applied chainctl patches
 
 
     added 806 packages, and audited 1058 packages in 20s
@@ -55,7 +55,7 @@ Should fail with error message: `package not found http-signature`
 - Run test command again:
 
     ```shell
-    snyk test --json
+    chainctl test --json
     ```
 
     ```shell
@@ -66,7 +66,7 @@ Should fail with error message: `package not found http-signature`
   "uniqueCount": 112,
   "projectName": "goof",
   "displayTargetFile": "package-lock.json",
-  "path": "/Users/anthonysayre/snyky/goof"
+  "path": "/Users/anthonysayre/chainguard-app-building/goof"
     }
 
     ```
@@ -76,35 +76,35 @@ Should fail with error message: `package not found http-signature`
 
 #### Monitor Project and Generate a report
 
-- Download snyk-to-html
+- Download chainctl-to-html
     ```shell
-    npm install snyk-to-html -g
+    npm install chainctl-to-html -g
     ```
 - Make vars
     ```shell
-    export SNYK_ORG_ID=<insert your snyk org id>
+    export chainctl_ORG_ID=<insert your chainctl org id>
     # verify:
-    echo $SNYK_ORG_ID
-    # Don't move fwd if this var does not return your Snyk org ID
+    echo $chainctl_ORG_ID
+    # Don't move fwd if this var does not return your chainctl org ID
   ```
   
 
 - Monitor the local project (with env vars)
     ```shell
-    # Below command is using a custom vars ($SNYK_ORG_ID, $MACGUFFIN, and built-in var from your local env ($HOME)
-    snyk monitor --org=$SNYK_ORG_ID --project-name=$HOME:$MACGUFFIN
+    # Below command is using a custom vars ($chainctl_ORG_ID, $MACGUFFIN, and built-in var from your local env ($HOME)
+    chainctl monitor --org=$chainctl_ORG_ID --project-name=$HOME:$MACGUFFIN
     ```
-- Go to Snyk UI and view the project import results
+- Go to chainctl UI and view the project import results
 
-  ![image](snyk-monitor-ui-local.png?)
+  ![image](chainctl-monitor-ui-local.png?)
 - Go back to `z-shell terminal`, test and output results to report artifact
     ```shell
-    snyk test --json --org=$SNYK_ORG_ID | snyk-to-html -o snyk_results.html
+    chainctl test --json --org=$chainctl_ORG_ID | chainctl-to-html -o chainctl_results.html
   ` # View results
-    open snyk_results.html
+    open chainctl_results.html
   ```
   
-  ![image](snyk-report-results.png?)
+  ![image](chainctl-report-results.png?)
 
 > **Q:** How many vulns identified?
 
@@ -144,50 +144,50 @@ To use pipelines, we just need to create a `.gitlab-ci.yml` file.  There are [a 
   - https://gitlab.com/<GitLab-User>/Goof
 - On the left-hand side menu, click **Settings >> CI/CD**
 - Find the **Variables** section, click **Expand**
-- Get your Snyk PAT and a Snyk Org ID, make a variable in the GitLab repo for both
-- Make $SNYK_TOKEN and $SNYK_ORG_ID vars
+- Get your chainctl PAT and a chainctl Org ID, make a variable in the GitLab repo for both
+- Make $chainctl_TOKEN and $chainctl_ORG_ID vars
 - When complete it should look like the below:
-  - Be sure to toggle 'protected' and 'masked' for the $SNYK_TOKEN var
+  - Be sure to toggle 'protected' and 'masked' for the $chainctl_TOKEN var
   - This is like the `.zshrc` (or the `.bashrc`) file! Or like using custom vars with `EXPORT` command
-  ![image](gitlab-snyk-vars.png?)
+  ![image](gitlab-chainctl-vars.png?)
 
 ### A Basic GitLab CI Pipeline
 
 In your **z-shell terminal**, 
-save the following as `.gitlab-ci.yml` in your repo project at `~/snyky/goof/.gitlab-ci.yml`
+save the following as `.gitlab-ci.yml` in your repo project at `~/chainguard-app-building/goof/.gitlab-ci.yml`
 
 ```shell
-touch ~/snyky/goof/.gitlab-ci.yml
-open -a TextEdit ~/snyky/goof/.gitlab-ci.yml
+touch ~/chainguard-app-building/goof/.gitlab-ci.yml
+open -a TextEdit ~/chainguard-app-building/goof/.gitlab-ci.yml
 ```
 
 Add these contents:
 
 ```yaml
-# Example Snyk script for GitLab CI/CD Pipeline with Node.js project
+# Example chainctl script for GitLab CI/CD Pipeline with Node.js project
 
 dependency_scanning:
   image: node:latest
   stage: test
   script:
-    # Install npm, snyk, and snyk-to-html
+    # Install npm, chainctl, and chainctl-to-html
     - npm install -g npm@latest
-    - npm install -g snyk
-    - npm install snyk-to-html -g
-    # Run snyk help, snyk auth, snyk monitor, snyk test to break build and out report
-    - snyk --help
-    - snyk auth $SNYK_TOKEN
-    - echo SnykProjName:${CI_API_V4_URL}:${CI_COMMIT_SHORT_SHA} # <--- We're adding these GitLab variables to the Snyk monitor command directly below
-    - snyk monitor --org=$SNYK_ORG_ID --project-name=${CI_API_V4_URL}:${CI_COMMIT_SHORT_SHA} # <---the project name in Snyk UI will be <GitLab api url>:<GitLab commit SHA(short)>
-    - snyk test --json --org=$SNYK_ORG_ID | snyk-to-html -o snyk_results.html
+    - npm install -g chainctl
+    - npm install chainctl-to-html -g
+    # Run chainctl help, chainctl auth, chainctl monitor, chainctl test to break build and out report
+    - chainctl --help
+    - chainctl auth $chainctl_TOKEN
+    - echo chainctlProjName:${CI_API_V4_URL}:${CI_COMMIT_SHORT_SHA} # <--- We're adding these GitLab variables to the chainctl monitor command directly below
+    - chainctl monitor --org=$chainctl_ORG_ID --project-name=${CI_API_V4_URL}:${CI_COMMIT_SHORT_SHA} # <---the project name in chainctl UI will be <GitLab api url>:<GitLab commit SHA(short)>
+    - chainctl test --json --org=$chainctl_ORG_ID | chainctl-to-html -o chainctl_results.html
 
   # Save report to artifacts
   artifacts:
     when: always
     paths:
-      - snyk_results.html
+      - chainctl_results.html
 ```
-ref: https://github.com/snyk-labs/snyk-cicd-integration-examples/blob/master/GitLabCICD/gitlab-npm.yml
+ref: https://github.com/chainctl-labs/chainctl-cicd-integration-examples/blob/master/GitLabCICD/gitlab-npm.yml
 
 running a CI pipeline inside a container: https://docs.gitlab.com/runner/executors/docker.html
 > Notice the above CI script contains references to some GitLab variables including CI_COMMIT_SHORT_SHA
@@ -228,7 +228,7 @@ Should be: `https://gitlab.com/$GITLAB_USER/goof`
 You can also generate the URL from your `repo_metadata_goof.json` file (and the knowledge of the `pipelines` web path):
 
 ```shell
-echo "$( jq -r '.web_url' ~/snyky/repo_metadata_goof.json )/-/pipelines"
+echo "$( jq -r '.web_url' ~/chainguard-app-building/repo_metadata_goof.json )/-/pipelines"
 ```
 
 If you're manually navigating, click the `Pipelines` link under `CI/CD` on the left-side menu
@@ -244,44 +244,44 @@ You should see a `pending` or `running` (or maybe `passed` or `failed`) pipeline
    ![image](artifact.png?)
 
 
-5. Click on **snyk-results.html**:
+5. Click on **chainctl-results.html**:
    ![image](artifact-browse-tab.png?)
 
 
 ---
 
-> **Q:** The `snyk monitor` command may have succeeded, but the `snyk test` command and the artifact left behind probably did not find any vulns... Why?
+> **Q:** The `chainctl monitor` command may have succeeded, but the `chainctl test` command and the artifact left behind probably did not find any vulns... Why?
 
 > **A:** Add an NPM install to the CI file:
 
 ```shell
-open -a TextEdit ~/snyky/goof/.gitlab-ci.yml
+open -a TextEdit ~/chainguard-app-building/goof/.gitlab-ci.yml
 ```
 
 ```yaml
-# Example Snyk script for GitLab CI/CD Pipeline with Node.js project
+# Example chainctl script for GitLab CI/CD Pipeline with Node.js project
 
 dependency_scanning:
   image: node:latest
   stage: test
   script:
-    # Install npm, snyk, and snyk-to-html
+    # Install npm, chainctl, and chainctl-to-html
     - npm install -g npm@latest
-    - npm install -g snyk
-    - npm install snyk-to-html -g
-    # Run snyk help, snyk auth, snyk monitor, snyk test to break build and out report
-    - snyk --help
-    - echo SnykProjName:${CI_API_V4_URL}:${CI_COMMIT_SHORT_SHA} # <--- add these GitLab variables to the Snyk monitor command directly below
-    - snyk monitor --org=$SNYK_ORG_ID --project-name=${CI_API_V4_URL}:${CI_COMMIT_SHORT_SHA} # <---the project name in Snyk UI will be <GitLab api url>:<GitLab commit SHA(short)>
+    - npm install -g chainctl
+    - npm install chainctl-to-html -g
+    # Run chainctl help, chainctl auth, chainctl monitor, chainctl test to break build and out report
+    - chainctl --help
+    - echo chainctlProjName:${CI_API_V4_URL}:${CI_COMMIT_SHORT_SHA} # <--- add these GitLab variables to the chainctl monitor command directly below
+    - chainctl monitor --org=$chainctl_ORG_ID --project-name=${CI_API_V4_URL}:${CI_COMMIT_SHORT_SHA} # <---the project name in chainctl UI will be <GitLab api url>:<GitLab commit SHA(short)>
     # Insert the below npm command - npm will build the application before scanning
     - npm install # <---
-    - snyk test --json --org=$SNYK_ORG_ID | snyk-to-html -o snyk_results.html
+    - chainctl test --json --org=$chainctl_ORG_ID | chainctl-to-html -o chainctl_results.html
 
   # Save report to artifacts
   artifacts:
     when: always
     paths:
-      - snyk_results.html
+      - chainctl_results.html
 ```
 
 > Use `git` to `add`, `commit`, and `push` the updated `.gitlab-ci.yml` file to the repo ^^^ How long does it take to finish the test this time?
@@ -295,7 +295,7 @@ dependency_scanning:
 
 ### How is all of this relevant?
 
-> Example: Customer request for a way to get specific SCM **commit SHAs** into Snyk UI/API
+> Example: Customer request for a way to get specific SCM **commit SHAs** into chainctl UI/API
 
 > **Q:** What is a commit SHA?
 
@@ -303,31 +303,31 @@ dependency_scanning:
 
 ### Commit SHA in pipeline
 
-> Since I included the GitLab env var called ${CI_COMMIT_SHORT_SHA} in the snyk monitor command in the CI file, you can see it below...
+> Since I included the GitLab env var called ${CI_COMMIT_SHORT_SHA} in the chainctl monitor command in the CI file, you can see it below...
 ![img.png](gitlab-ci-commit-sha.png?)
 link: https://gitlab.com/$GITLAB_USER/Goof/-/jobs
-### Snyk UI
+### chainctl UI
 
-> ... and it will also appear as the project name in the Snyk UI...
-![image](snyk-ui-commit-sha.png?)
-link: https://app.snyk.io/org/$ORG_SLUG/projects
+> ... and it will also appear as the project name in the chainctl UI...
+![image](chainctl-ui-commit-sha.png?)
+link: https://app.chainctl.io/org/$ORG_SLUG/projects
 
-### Snyk API
+### chainctl API
 
-> ... AND it will also appear in the Snyk API...
-![image](snyk-api-example.png?)
-link:https://snyk.docs.apiary.io/#reference/projects/individual-project/retrieve-a-single-project?console=1
+> ... AND it will also appear in the chainctl API...
+![image](chainctl-api-example.png?)
+link:https://chainctl.docs.apiary.io/#reference/projects/individual-project/retrieve-a-single-project?console=1
 
 curl command to get the same thing:
 
 ```shell
 curl --include \
      --header "Content-Type: application/json" \
-     --header "Authorization: token $SNYKTOKEN" \
-  'https://api.snyk.io/api/v1/org/$SNYK_ORG_ID/project/<snyk-project-id>'
+     --header "Authorization: token $chainctlTOKEN" \
+  'https://api.chainctl.io/api/v1/org/$chainctl_ORG_ID/project/<chainctl-project-id>'
 ```
 
-> Once you have verified your commit SHA appears in the Snyk API using the above API endpoint, you have finished the lab!
+> Once you have verified your commit SHA appears in the chainctl API using the above API endpoint, you have finished the lab!
 
 | Previous: [GitLab](/labs/01_github) | Next: [WIP! Not updated! Docker](/labs/02_docker) |
 |-------------------------------------------:|:--------------------------------------------------|
