@@ -362,5 +362,5 @@ open -a TextEdit Chart.yaml
 
 ---
 
-|Next: [GitLab](/labs/01_gitlab)|
+|Next: [GitHub](/labs/01_github)|
 |:---:|
