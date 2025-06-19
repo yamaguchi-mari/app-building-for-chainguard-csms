@@ -4,15 +4,126 @@
 1. Be familiar with the Bash commands we'll use in this course, and a little about the linux file system structure
 1. Have a "local" development environment set up
 
+
+# 🐧 Intro to GNU/Linux – Commands & Key Terms
+
+This reference is designed to help beginners get comfortable with the Linux command line. It includes essential commands and key terms to prepare you for hands-on exercises.
+
 ---
 
-##### Open your zshell terminal
+## Basic GNU/Linux Commands
 
-![image](zshell.png?)
+### Essential Commands
+
+- `cd` – Change the current directory
+- `ls` – List the contents of a directory
+- `pwd` – Show the full path of the current working directory
+- `cp` – Copy a file or folder
+- `mv` – Move or rename a file or folder
+- `rm` – Remove a file or folder *(use with caution)*
+- `mkdir` – Make a new directory
+- `touch` – Create an empty file
+- `cat` – Display the contents of a file in the terminal window
+- `echo` – Print text or variables to the terminal window
+- `man` – Show the manual/help for a command
+- `chmod` – Change permissions on a file or folder
+- `chown` – Change ownership of a file or folder
+
+
+<details>
+  <summary> 
+  <strong>Advanced, "ask AI" question</strong></summary>
+  - Q: 
+  
+  Why is 'chroot' command important for Chainguard?
+
+  - `chroot` – Run a command with a different root directory  
+    This is used to "jail" a process in a different filesystem view. Common in minimal container-like setups, or Linux-from-scratch systems. Requires root access and caution.
+</details>
+
+
+---
+
+## Key GNU/Linux Terms
+
+- **terminal** – A text-based interface to interact with the system (e.g., Bash, Zsh)
+- **prompt** – Where you type commands in the terminal
+- **shell** – The program that interprets commands in the terminal (e.g., Bash, Zsh)
+- **user** – A person or process that uses the system and has permissions
+- **home directory** – A user's personal folder, usually located at `~/`
+- **path** – A file or folder's location in the system (e.g., `/etc/passwd`)
+- **root** – The top-level directory `/` and/or the superuser account
+- **permissions** – Rules that control who can read/write/execute files
+- **process** – A running instance of a program
+- **service (daemon)** – A background process that supports core functions
+- **environment** – The operating system’s configuration: users, processes, files, etc.
+- **package manager (OS level)** – Tool to install and manage software (e.g., `apt`, `apk`, `dnf`)
+- **package manager (application level)** – Also to install and manage software (e.g., `pip`, `npm`, `maven`)
+
+
+<details>
+  <summary> 
+  <strong>Advanced, "ask AI" question</strong></summary>
+  Q:
+  
+  What's the difference between OS level and application level package managers? Why is this important to understand for Chainguard?
+</details>
 
 ---
 
 ### Filesystem, Directories, and Navigation
+
+Open your terminal (zshell terminal for MacOS, Bash terminal for Linux)
+
+![image](zshell.png?)
+
+
+When you first open it, you should see your prompt:
+
+**anthony.sayre@AnthonySayres-MacBook-Pro ~ %**
+
+Q: What is **~**?
+
+A: **~** (tildae) is shorthand for your 'home' directory
+
+See what the longhand for your home directory is by typing:
+
+```bash
+pwd
+```
+> 'pwd' stands for 'print working directory', it will 'print' the lon version of the /path/to/whatever/directory you are currently in
+
+for MACOS, 'home' is: `/Users/username`  
+
+for Linux OS, 'home' is: `/home/username`
+
+Q: What do we mean when we say 'home', 'directory', or 'path'?
+
+A:
+
+#### Understanding the Linux directory structure (a set of organized folders):
+
+![image](linuxdir2.png?)
+
+
+[The Filesystem Hierarchy Standard (FHS)](https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/)
+
+
+Navigate around a little from your terminal prompt:
+
+```bash
+cd ..
+```
+> - Note: **'cd'** means 'change directory', 
+> - **'..'** means 'one level above where you are in the hierarchy'
+
+Q: Now what does your prompt show?
+
+A: **.../Users %**
+
+
+
+---
 
 ##### Make a new directory to house your coursework
 
@@ -20,17 +131,7 @@
 mkdir ~/chainguard-app-building
 ```
 
-*Explanation:*
-- `mkdir` is the command to make a new directory
-- `~` (tildae) is shorthand for your home directory: 
-
-for MACOS:
-`/Users/your_user_name` 
-
-or 
-
-for Linux OS:
-`/home/your_user_name`
+> `mkdir` is the command to make a new directory
 
 - `chainguard-app-building` is the new directory we're creating.  `~/chainguard-app-building` is the full path of the new directory.  Again the tildae (~) is short-hand for /Users/your_user_name so...
 
@@ -42,12 +143,6 @@ is the same thing as...
 
 
 ---
-
-#### Understanding the Linux directory structure:
-
-[The Filesystem Hierarchy Standard (FHS)](https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/)
-
-![image](linuxdir.png?)
 
 
 > ### **Q:** What types of things use an Operating System (OS)?
