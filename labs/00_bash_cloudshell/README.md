@@ -32,7 +32,7 @@ This reference is designed to help beginners get comfortable with the Linux comm
 
 <details>
   <summary> 
-  <strong>Advanced, "ask AI" question</strong></summary>
+  <strong>Advanced, "ask AI" questions</strong></summary>
   - Q: 
   
   Why is 'chroot' command important for Chainguard?
@@ -63,10 +63,14 @@ This reference is designed to help beginners get comfortable with the Linux comm
 
 <details>
   <summary> 
-  <strong>Advanced, "ask AI" question</strong></summary>
+  <strong>Advanced, "ask AI" questions</strong></summary>
   Q:
   
   What's the difference between OS level and application level package managers? Why is this important to understand for Chainguard?
+
+  Q:
+  
+  Do Chainguard solutions address application level software or OS level software?
 </details>
 
 ---
@@ -93,7 +97,7 @@ pwd
 ```
 > 'pwd' stands for 'print working directory', it will 'print' the lon version of the /path/to/whatever/directory you are currently in
 
-for MACOS, 'home' is: `/Users/username`  
+for MacOS, 'home' is: `/Users/username`  
 
 for Linux OS, 'home' is: `/home/username`
 
