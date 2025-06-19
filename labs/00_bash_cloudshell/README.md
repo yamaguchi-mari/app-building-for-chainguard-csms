@@ -70,7 +70,7 @@ This reference is designed to help beginners get comfortable with the Linux comm
 
   Q:
   
-  Do Chainguard solutions address application level software or OS level software?
+  Do Chainguard solutions address application level software? Or only OS level software?
 </details>
 
 ---
@@ -103,9 +103,7 @@ for Linux OS, 'home' is: `/home/username`
 
 Q: What do we mean when we say 'home', 'directory', or 'path'?
 
-A:
-
-#### Understanding the Linux directory structure (a set of organized folders):
+A: **Understanding the Linux directory structure (a set of organized folders):**
 
 ![image](linuxdir2.png?)
 
@@ -113,7 +111,27 @@ A:
 [The Filesystem Hierarchy Standard (FHS)](https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/)
 
 
+
+No matter what kind of computer your application is running on (HW, VM, Container), it will be using a file system...
+![image](filesystems-allthewaydown2.png?)
+
 Navigate around a little from your terminal prompt:
+
+
+<details>
+  <summary> 
+  <strong>Advanced, "ask AI" questions</strong></summary>
+
+Q:
+
+What types of things use an Operating System (OS) and file systems? Split the answer under three main types: Hardware devices, VMs, and Containers and describe how the OS for each interacts with the linux hierarchical file system?
+
+I am a customer-facing Chainguard colleague just starting to learn Linux, bash, Git, and containers, so keep the answer basic
+</details>
+
+---
+
+### Navigate around a little...
 
 ```bash
 cd ..
@@ -145,37 +163,6 @@ is the same thing as...
 
 `~/chainguard-app-building`
 
-
----
-
-
-> ### **Q:** What types of things use an Operating System (OS)?
-
-> ### **A:** 3 types of things...
-> 1) Hardware(HW) based devices (laptops, PCs, servers, routers, switches, IoT/Mobile, etc...)
->    - Full control of the HW resources
->    - All the fancy bells and whistles - package support for USB drivers, /cdrom, etc....
->    - Uses package managers for dependencies similar to what devs use for language support (apt, yum, )
-> 2) Virtual Machines(VM)
->    - Tries to faithfully recreate a HW-based operating system as closely as possible
-> 3) Containers(Docker, etc...)?
->    - Does NOT try to faithfully recreate a HW-based OS
->    - Is it technically an OS? Don't know, but it runs a file system... reduced down to less folders in the directory (no system-d in some linux based containers)
-
-> ### Other tips that helped me understand the difference between the above 3 types of things^^^
->
-> - Full Operating Systems (physical and VMs) run many services on a given computer
-> - Container systems run fewer services
-> - Operating systems use File Systems (as depicted in the graphic below) to run services/processes (reading and writing to files)
->   - Linux uses System-D for this, Mac-OS uses [Launch-D](https://medium.com/swlh/how-to-use-launchd-to-run-services-in-macos-b972ed1e352), Windows uses Service Control Manager / Task Manager... and Containers use Docker (or podman or container-d)
-> - Services are just files - compiled binary programs are files (files that can write to other binaries (databases) or plain files)
-> -The binaries are stored in the sub-folders of the File System (whatever thing it may be running in)
-> - You can add your own binaries and plain text files to the file system
-
-> #### ^^^ Understanding the above helps for trouble-shooting - you'll see file/folder references a LOT in debug output commands
-
-No matter where your app is or what form-factor it is using (HW, VM, Container), it will be using a file system...
-![image](filesystems-allthewaydown.png?)
 
 ---
 #### Absolute vs relative paths
