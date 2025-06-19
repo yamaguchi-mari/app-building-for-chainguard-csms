@@ -115,8 +115,6 @@ A: **Understanding the Linux directory structure (a set of organized folders):**
 No matter what kind of computer your application is running on (HW, VM, Container), it will be using some variation on the concept of the Linux file system...
 ![image](filesystems-allthewaydown2.png?)
 
-Navigate around a little from your terminal prompt:
-
 
 <details>
   <summary> 
@@ -131,7 +129,7 @@ I am a customer-facing Chainguard colleague just starting to learn Linux, bash, 
 
 ---
 
-### Navigate around a little...
+### Navigate around a little from your terminal prompt:
 
 ```bash
 cd ..
