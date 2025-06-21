@@ -71,6 +71,14 @@ This reference is designed to help beginners get comfortable with the Linux comm
   Q:
   
   Do Chainguard solutions address application level software? Or only OS level software?
+
+  Q:
+
+  For Chainguard base images, if someone adds their own custom application with app-level dependencies to that base image, does chainguard secure the application level dependencies?
+
+  Q:
+
+  In Chainguard's Python image for example, is Chainguard securing and updating OS level dependencies and also Python dependencies? If so, which Python dependencies? Standard deps? 3rd party deps?
 </details>
 
 ---
@@ -108,7 +116,7 @@ A: **Understanding the Linux directory structure (a set of organized folders):**
 ![image](linuxdir2.png?)
 
 
-[The Filesystem Hierarchy Standard (FHS)](https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/)
+[The Filesystem Hierarchy Standard (FHS)](https://www.linuxtrainingacademy.com/linux-directory-structure-and-file-system-hierarchy/)
 
 
 
@@ -122,30 +130,102 @@ No matter what kind of computer your application is running on (HW, VM, Containe
 
 Q:
 
-What types of things use an Operating System (OS) and file systems? Split the answer under three main types: Hardware devices, VMs, and Containers and describe how the OS for each interacts with the linux hierarchical file system?
+What types of things use an Operating System (OS) and file systems? Split the answer under three main types: Hardware devices, VMs, and Containers and describe how the OS for each interacts with the linux hierarchical file system.
 
-I am a customer-facing Chainguard colleague just starting to learn Linux, bash, Git, and containers, so keep the answer basic
+I am a customer-facing post-sales account manager just starting to learn Linux, Bash, Git, and containers, so keep the answer basic
 </details>
 
 ---
 
-### Navigate around a little from your terminal prompt:
+### Absolute pathing vs relative pathing 
+
+Let's navigate around a little from your terminal prompt. We'll use the 'change directory' (cd) command and give it a path of where to take us.
+
+relative pathing starts from wherever you are in the directory
 
 ```bash
-cd ..
+cd ../..
 ```
 > - Note: **'cd'** means 'change directory', 
 > - **'..'** means 'one level above where you are in the hierarchy'
 
 Q: Now what does your prompt show?
 
-A: **.../Users %**
+A: **.../ %**
 
+You just changed directories (moved up two levels from where you were in the hierarchy) using **relative pathing**, your nworking directory is now **root** or **/**
+
+Show what is in the `/` directory:
+
+```bash
+ls
+```
+
+Now lets go back to our home directory:
+
+```bash
+cd ~
+```
+
+Go to **etc** using relative pathing:
+
+```bash
+cd ../etc/
+```
+
+See what's there:
+
+```bash
+ls
+```
+
+Look at a file:
+
+```bash
+cat passwd
+```
+
+Go back to your home folder:
+
+```bash
+cd ~
+```
+
+
+Now lets try absolute pathing to get to the same place:
+
+```bash
+cd /etc
+```
+
+List out a more detailed view of the contents of **etc**
+
+```bash
+ls -la
+```
+
+Go back to home again:
+
+```bash
+cd /Users/<your user name>
+```
+
+Ensure you really got back to your home folder by reviewing your prompt, does it look like this?:
+
+**...~ %**
+
+If so then success!
+
+
+> Note: You don't have to navigate to a directory to read files inside that directory
+> 
+> ---
+> Q: How could we use the 'cat' command and pathing to read the same 'passwd' file inside the **etc** folder?
 
 
 ---
 
-##### Make a new directory to house your coursework
+#### Make a new directory to house your coursework
 
 ```shell
 mkdir ~/chainguard-app-building
@@ -162,36 +242,6 @@ is the same thing as...
 `~/chainguard-app-building`
 
 
----
-#### Absolute vs relative paths
-
-*Absolute:* Navigate from a fixed point (root)
-
-*Relative:* Navigate from where you are in the directory (your user's active working directory)
-
-Btw, where *am* I in the directory?
-
-Use `pwd` command to figure it out:
-
-```bash
-pwd
-```
-
-If you have not changed directories yet, you should still be in your "home" directory and the result of the command will look like this: 
-
-```bash
-# on MACOS...
-/Users/anthonysayre
-```
- 
-or this...
-
-```bash
-# on most Linux OS...
-/Home/anthonysayre
-```
-
-
 Ensure you are in your "home" directory and make a new sub-directory in it
 
 ```shell
@@ -199,36 +249,9 @@ cd ~
 mkdir chainguard-app-building
 ```
 
-#### Navigate to the new directory (`cd` command)
+### Variables (vars):
 
-
-```shell
-# Use the full path
-cd ~/chainguard-app-building
-# or
-cd /home/$USER/chainguard-app-building
-# or
-cd $HOME/chainguard-app-building
-
-# Use the relative path
-# First, make sure you're in your home directory
-cd
-# or
-cd ~
-# Second, use the relative path to get to your new directory
-cd chainguard-app-building
-
-# Use tab completion. Type a part of the word "chainguard"...
-cd chaing # before you hit 'enter', press 'tab' key
-```
-
-*Explanation:*
-- Use the absolute path to get *from root* to any directory or file on your filesystem
-- Use the relative path to get *from your users current working directory* to any directory or file
-- Tab autocompletion is highly recommended
-- Note that the shell environment gives us many variables by default.  `$USER` is one such variable:
-
-command:
+Call a system environment variable:
 
 ```bash
 echo $USER 
@@ -236,20 +259,38 @@ echo $USER
 
 results:
 
-```bash
+```
 anthony.sayre
 ```
 
-You can see all the environment variables with the `env` command:
+Add your own custom variable:
 
-command:
+```bash
+export NAME=Frodo
+```
+
+This sets `$NAME` to `Frodo`
+
+Ensure it worked:
+
+```bash
+echo $NAME
+```
+
+result:
+
+```
+Frodo
+```
+
+You can see all the environment variables with the `env` command:
 
 ```bash
 env
 ```
 
 result:
-```bash
+```
 __CFBundleIdentifier=com.apple.Terminal
 TMPDIR=/var/folders/tx/mc65575x5ll5k7_y70mmdbyw0000gn/T/
 XPC_FLAGS=0x0
@@ -273,52 +314,15 @@ HOMEBREW_PREFIX=/opt/homebrew
 HOMEBREW_CELLAR=/opt/homebrew/Cellar
 HOMEBREW_REPOSITORY=/opt/homebrew
 INFOPATH=/opt/homebrew/share/info:
+NAME=Frodo
 LANG=en_US.UTF-8
 _=/usr/bin/env
 
 ```
 
-*Dollar sign $:*
-- Dollar sign -->   `$` indicates that we want the *value* of the variable here:
-  - `echo $Your_Variable_Here`
-- Example, create a custom variable of your own for this envirionment, go to your z-shell terminal and type this:
-
-```bash
-NAME=Frodo
-```
-
-This sets `$NAME` to `Frodo`
-
-Ensure it worked:
-
-command:
-
-```bash
-echo $NAME
-```
-
-result:
-
-```bash
-Frodo
-```
+> Q: Is your $NAME variable listed there?
 
 
-##### Examine the new directory
-
-```shell
-# List the contents of the directory
-ls
-# And again in 'list' (-l) format
-ls -l
-# And again showing a 'list' (-l) of 'all' (-a) files (including normally hidden files)
-ls -la
-```
-
-*Explanation:*
-- With the `ls -la` command options, you'll see `.` and `..`
-- `.` is shorthand for "current directory"
-- `..` is shorthand for the parent directory
 
 ---
 
@@ -326,7 +330,7 @@ ls -la
 
 ##### Shell-wide environment
 
-When you want a configuration available to you no matter where you are on the system, you can set an environment variable in your `~/.zshrc` file.  Because this file is loaded every time you log in, you'll always have it available.
+When you want a variable or other configuration available to you permanently, you can set an environment variable in your `~/.zshrc` file.  Because this file is loaded every time you log in, you'll always have your customizations available.
 
 We're all going to pick a unique [MacGuffin](https://en.wikipedia.org/wiki/MacGuffin) that will identify resources we create in our shared environment.
 
@@ -351,7 +355,7 @@ echo $MACGUFFIN
 
 ---
 
-#### Chainguard at command line
+### Chainguard at command line
 
 Ensure chainctl is [installed locally](https://edu.chainguard.dev/chainguard/chainctl-usage/how-to-install-chainctl/)
 
@@ -412,17 +416,13 @@ touch Chart.yaml
 open -a TextEdit Chart.yaml
 ```
 
-##### Tildae
-- In Bash, `~` is a shortcut meaning "this user's home directory"
-- So when the user `fbaggins` is logged in to a system, `mkdir ~/chainguard-app-building` is a shortcut for `mkdir /home/fbaggins/chainguard-app-building`.  (Probably.  Frodo's home directory could be somewhere else.)
-
 ### Command tricks
 
 ##### Autocomplete
 
 - Try using the `Tab` key to autocomplete paths or commands
-  - Type `cd ~/sn` without pressing Enter.  Press `Tab` instead.
-  - Try typing `echo $MACG` and pressing `Tab`.
+  - Type `cd ~/chaingu` without pressing Enter.  Press `Tab` instead.
+  - Try typing `echo $USE` and pressing `Tab`.
 
 ##### Command history
 
