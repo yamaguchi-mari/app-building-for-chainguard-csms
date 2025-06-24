@@ -380,9 +380,9 @@ brew tap chainguard-dev/tap
 brew install chainctl
 ```
 
-However, what if you are working in a system that does not have this package manager? Or you need a process that can work across systems with many different package managers? Homebrew works on a Mac only. Not practical if I need things to work across Mac, Linux, Winwos, etc...
+However, what if you are working in a system that does not have this package manager? Or you need a process that can work across systems with many different package managers? Homebrew works on a Mac only. Not practical if I need things to work across Mac, Linux, Windows, etc...
 
-Let;s try to install this using a command that exists across all three: **wget** We'll use a cloud shell so as not to mess with your Mac environment.
+Let's try to install this using a commands that can work without OS specific package managers. We'll use a cloud shell so as not to mess with your Mac environment.
 
 Go to your [Chainguard Google account](https://console.cloud.google.com/) and sign-in
 
