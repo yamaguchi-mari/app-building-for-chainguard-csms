@@ -125,7 +125,7 @@ A: **Understanding the Linux directory structure (a set of organized folders):**
 No matter what kind of computer your application is running on (HW, VM, Container), it will be using some variation on the concept of the Linux file system...
 ![image](filesystems-allthewaydown2.png?)
 
-Many technical concepts can be boiled down to creating/editing files, moving files, truningm files into executable programs, applying underlying OS services and processes to files.
+Many technical concepts can be boiled down to creating/editing files, moving files, turning files into executable programs, applying underlying OS services and processes to files.
 
 <details>
   <summary> 
