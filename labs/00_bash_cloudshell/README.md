@@ -123,6 +123,7 @@ A: **Understanding the Linux directory structure (a set of organized folders):**
 ### It's file systems all the way down:
 
 No matter what kind of computer your application is running on (HW, VM, Container), it will be using some variation on the concept of the Linux file system...
+
 ![image](filesystems-allthewaydown2.png?)
 
 Many technical concepts can be boiled down to creating/editing files, moving files, turning files into executable programs, applying underlying OS services and processes to files.
@@ -379,9 +380,9 @@ brew tap chainguard-dev/tap
 brew install chainctl
 ```
 
-Homebrew commands are an abstraction, simplifying several underlying operations that can accomplish the same thing: 
+However, what if you are working in a system that does not have this package manager? Or you need a process that can work across systems with many different package managers? Homebrew works on a Mac only. Not practical if I need things to work across Mac, Linux, Winwos, etc...
 
-Let's do it with less abstractions shall we? We'll use a cloud shell so as not to mess with your Mac environment.
+Let;s try to install this using a command that exists across all three: **wget** We'll use a cloud shell so as not to mess with your Mac environment.
 
 Go to your [Chainguard Google account](https://console.cloud.google.com/) and sign-in
 
