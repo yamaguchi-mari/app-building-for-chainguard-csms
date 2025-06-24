@@ -125,6 +125,7 @@ A: **Understanding the Linux directory structure (a set of organized folders):**
 No matter what kind of computer your application is running on (HW, VM, Container), it will be using some variation on the concept of the Linux file system...
 ![image](filesystems-allthewaydown2.png?)
 
+Most everything in tech can be boiled down to creating/editing files, moving file 
 
 <details>
   <summary> 
@@ -454,19 +455,18 @@ Try again with `sudo` in front of the command:
 sudo mv chainctl_linux_x86_64 /usr/local/bin/
 ```
 
+Now make sure you can really call the binary/command:
 
-Understanding these concepts can help with troubleshooting
-> #### [install a chainguard tool manually](https://)
-
-```shell
-
-# the path env variable
-env
-cat ~/.zshrc
-# helped me get Chainguard license to text tool up and running on a system where it did not work properly out of the box
-
+```bash
+chainctl_linux_x86_64 --help
 ```
-[/WIP]
+
+> Note: If you get the help menu for the chainctl utility, it worked!
+
+
+Understanding these concepts can help with many things, including debugging/troubleshooting 
+
+
 #### End of Lab
 
 ---
