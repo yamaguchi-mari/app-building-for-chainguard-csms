@@ -26,6 +26,7 @@ This reference is designed to help beginners get comfortable with the Linux comm
 - `cat` – Display the contents of a file in the terminal window
 - `echo` – Print text or variables to the terminal window
 - `man` – Show the manual/help for a command
+- `wget` - Download files from the web
 - `chmod` – Change permissions on a file or folder
 - `chown` – Change ownership of a file or folder
 
@@ -119,6 +120,7 @@ A: **Understanding the Linux directory structure (a set of organized folders):**
 [The Filesystem Hierarchy Standard (FHS)](https://www.linuxtrainingacademy.com/linux-directory-structure-and-file-system-hierarchy/)
 
 
+### It's file systems all the way down:
 
 No matter what kind of computer your application is running on (HW, VM, Container), it will be using some variation on the concept of the Linux file system...
 ![image](filesystems-allthewaydown2.png?)
@@ -130,18 +132,18 @@ No matter what kind of computer your application is running on (HW, VM, Containe
 
 Q:
 
-What types of things use an Operating System (OS) and file systems? Split the answer under three main types: Hardware devices, VMs, and Containers and describe how the OS for each interacts with the linux hierarchical file system.
+What types of things use an Operating System (OS) and its underlying file system? Split the answer under three main types: Hardware devices, VMs, and Containers and describe how the OS for each interacts with the linux hierarchical file system.
 
 I am a customer-facing post-sales account manager just starting to learn Linux, Bash, Git, and containers, so keep the answer basic
 </details>
 
 ---
 
-### Absolute pathing vs relative pathing 
+### Absolute Pathing vs Relative Pathing 
 
-Let's navigate around a little from your terminal prompt. We'll use the 'change directory' (cd) command and give it a path of where to take us.
+Let's navigate around a little from your terminal prompt. We'll use the 'change directory' (cd) command and give it a path to a new location in the directory.
 
-relative pathing starts from wherever you are in the directory
+Relative pathing starts from wherever *you* are in the directory
 
 ```bash
 cd ../..
@@ -151,7 +153,7 @@ cd ../..
 
 Q: Now what does your prompt show?
 
-A: **.../ %**
+A: **...MacBook-Pro / %**
 
 You just changed directories (moved up two levels from where you were in the hierarchy) using **relative pathing**, your nworking directory is now **root** or **/**
 
@@ -170,8 +172,10 @@ cd ~
 Go to **etc** using relative pathing:
 
 ```bash
-cd ../etc/
+cd ../../etc
 ```
+
+> hint: type part of the command and then press <tab> key to autocomplete
 
 See what's there:
 
@@ -212,16 +216,16 @@ cd /Users/<your user name>
 
 Ensure you really got back to your home folder by reviewing your prompt, does it look like this?:
 
-**...~ %**
+**...MacBook-Pro ~ %**
 
 If so then success!
-
 
 > Note: You don't have to navigate to a directory to read files inside that directory
 > 
 > ---
 > Q: How could we use the 'cat' command and pathing to read the same 'passwd' file inside the **etc** folder?
 
+### (When the above question is answered you are done with this exercise)
 
 ---
 
@@ -233,7 +237,9 @@ mkdir ~/chainguard-app-building
 
 > `mkdir` is the command to make a new directory
 
-- `chainguard-app-building` is the new directory we're creating.  `~/chainguard-app-building` is the full path of the new directory.  Again the tildae (~) is short-hand for /Users/your_user_name so...
+- `chainguard-app-building` is the new directory we're creating.  `~/chainguard-app-building` is the full path of the new directory.  Again the tildae (~) is short-hand for /Users/your_user_name
+
+So...
 
 `/Users/your_user_name/chainguard-app-building` 
 
@@ -256,6 +262,8 @@ Call a system environment variable:
 ```bash
 echo $USER 
 ```
+
+> Note: the $USER variable comes standard with all Linux OS variants as well as all MacOS (Windows uses $USERNAME at Cmd Prompt)
 
 results:
 
@@ -337,29 +345,115 @@ We're all going to pick a unique [MacGuffin](https://en.wikipedia.org/wiki/MacGu
 ```shell
 # Choose a unique MacGuffin to identify your resources.
 # To be safe, use all lower case letters (no numbers or special chars)
-echo 'export MACGUFFIN=maltesefalcon' >> ~/.zshrc
+echo 'export MACGUFFIN=Linky' >> ~/.zshrc
 # EDIT this expression before running it:
-# - remove the '# ' at the beginning
-# - replace 'maltesefalcon' with your unique MacGuffin: 'ring', 'rug', 'time', or whatever
-# echo "export MACGUFFIN='maltesefalcon'" >> ~/.zshrc
+# - replace 'Linky' with your unique MacGuffin: 'ring', 'rug', 'time', your initials, whatever
 
 # print the contents of the .zshrc file to console, to ensure the command worked
 cat ~/.zshrc 
 
-# Tell your shell to re-read your .zshrc file
-source ~/.zshrc
-
 # Verify
 echo $MACGUFFIN
-```
 
+# Q: Is it there? Why not?
+
+# Tell your shell to reload your .zshrc file
+source ~/.zshrc
+
+# Reverify
+echo $MACGUFFIN
+
+# Q: Is it there now? Why?
+```
 ---
 
 ### Chainguard at command line
 
 Ensure chainctl is [installed locally](https://edu.chainguard.dev/chainguard/chainctl-usage/how-to-install-chainctl/)
 
-[WIP]
+Easiest on a Mac is:
+
+```bash
+brew tap chainguard-dev/tap
+brew install chainctl
+```
+
+Homebrew commands are an abstraction, simplifying several underlying operations that can accomplish the same thing: 
+
+Let's do it with less abstractions shall we? We'll use a cloud shell so as not to mess with your Mac environment.
+
+Go to your [Chainguard Google account](https://console.cloud.google.com/) and sign-in
+
+Click to activate your Google Cloud Shell:
+![image](google-cloud-shell.png?)
+> Note: Upper right corner
+
+
+Enter this command at the cloud shell prompt:
+
+```bash
+wget https://dl.enforce.dev/chainctl/latest/chainctl_linux_x86_64
+```
+
+Verify the file downloaded, and review the permissions on the file:
+```bash
+ls -l
+```
+
+Result:
+```
+-rw-rw-r-- 1 anthony_sayre anthony_sayre 73584824 Jun 20 21:30 chainctl_linux_x86_64
+-rwxr-xr-x 1 anthony_sayre anthony_sayre      913 Jun 22 22:07 README-cloudshell.txt
+```
+
+Notice that the chainctl binary is present but does not have the execute permission. We want to see some x's in the permission section (which means executable). Until then, we cannot do anything with this binary.
+
+Make it executable:
+```bash
+chmod +x chainctl_linux_x86_64 
+```
+
+Review the permissions again:
+```bash
+ls -l
+```
+
+Result:
+```
+-rwxrwxr-x 1 anthony_sayre anthony_sayre 73584824 Jun 20 21:30 chainctl_linux_x86_64
+-rwxr-xr-x 1 anthony_sayre anthony_sayre      913 Jun 22 22:07 README-cloudshell.txt
+```
+
+Notice the binary file `chainctl_linux_x86_64` now had **x's** in the permissions section, the file is now an **executable program** in this environment.
+
+However, we should move it to a directory where we normally keep executable binaries.
+
+There are a few places we could put it. Review what they are by examining the $PATH variable
+
+```bash
+echo $PATH
+```
+
+Result:
+```
+/opt/gradle/bin:/opt/maven/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/go/bin:/usr/local/node_packages/node_modules/.bin:/usr/local/rvm/bin:/home/anthony_sayre/.gems/bin:/usr/local/rvm/bin:/home/anthony_sayre/gopath/bin:/google/gopath/bin:/google/flutter/bin:/usr/local/nvm/versions/node/v22.16.0/bin
+```
+
+We could move the binary file to any one of the paths specified above ^^
+
+Let's move it to `/usr/local/bin/`
+
+```bash
+mv chainctl_linux_x86_64 /usr/local/bin/
+```
+
+Q: Did it work?
+
+Try again with `sudo` in front of the command:
+```bash
+sudo mv chainctl_linux_x86_64 /usr/local/bin/
+```
+
 
 Understanding these concepts can help with troubleshooting
 > #### [install a chainguard tool manually](https://)
