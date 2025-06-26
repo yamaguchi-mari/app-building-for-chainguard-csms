@@ -318,7 +318,7 @@ LOGNAME=anthony.sayre
 USER=anthony.sayre
 PATH=/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/usr/local/go/bin:/Users/anthony.sayre/go/bin
 SHLVL=1
-PWD=/Users/anthony.sayre/git/app-building-for-chainguard-tsms
+PWD=/Users/anthony.sayre/git/app-building-for-chainguard-success-managers
 OLDPWD=/Users/anthony.sayre/git
 HOMEBREW_PREFIX=/opt/homebrew
 HOMEBREW_CELLAR=/opt/homebrew/Cellar
@@ -474,12 +474,13 @@ Understanding these concepts can help with many things, including debugging/trou
 #### End of Lab
 
 ---
+<details>
+  <summary> 
+  <strong>Self-Study and/or Extra Credit</strong></summary>
 
-### Self-Study and/or Extra Credit
+More notes on directories and the filesystem
 
-### More notes on directories and the filesystem
-
-##### An Unusual Class Convention
+An Unusual Class Convention:
 
 > In this class, you will find instructions like this:
 
@@ -542,6 +543,7 @@ open -a TextEdit Chart.yaml
   - A matching command should appear
   - Press CTRL+R again to cycle through earlier matching commands
 
+</details>
 ---
 
 |Next: [GitHub](/labs/01_github)|
