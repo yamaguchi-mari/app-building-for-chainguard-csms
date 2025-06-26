@@ -441,7 +441,8 @@ Result:
 /opt/gradle/bin:/opt/maven/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/go/bin:/usr/local/node_packages/node_modules/.bin:/usr/local/rvm/bin:/home/anthony_sayre/.gems/bin:/usr/local/rvm/bin:/home/anthony_sayre/gopath/bin:/google/gopath/bin:/google/flutter/bin:/usr/local/nvm/versions/node/v22.16.0/bin
 ```
 
-We could move the binary file to any one of the paths specified above ^^
+> Note: We could move the binary file to any one of the paths specified above ^^
+> The result will make it callable from anywehre in the file system (just like the other core utils)
 
 Let's move it to `/usr/local/bin/`
 
@@ -465,7 +466,9 @@ chainctl_linux_x86_64 --help
 > Note: If you get the help menu for the chainctl utility, it worked!
 
 
-Understanding these concepts can help with many things, including debugging/troubleshooting 
+Understanding these concepts can help with many things, including debugging/troubleshooting
+
+![image](Dale-Paths-Convo.png)
 
 
 #### End of Lab
