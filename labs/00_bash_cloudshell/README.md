@@ -466,7 +466,7 @@ chainctl_linux_x86_64 --help
 > Note: If you get the help menu for the chainctl utility, it worked!
 
 
-Understanding these concepts can help with many things, including debugging/troubleshooting
+This stuff comes up more than we'd like to think...
 
 ![image](Dale-Paths-Convo.png)
 
