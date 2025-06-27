@@ -124,8 +124,6 @@ This reference is designed to help beginners get comfortable with the Linux comm
 **What it does:** Changes the root directory for the current shell session and executes a command within that isolated environment.  
 **Why it matters:** Useful when helping customers debug container or distro-less image issues by simulating execution inside a different root filesystem—especially relevant when examining minimal container environments used with Chainguard Images.
 
----
-
 </details>
 
 ---
@@ -138,10 +136,6 @@ This reference is designed to help beginners get comfortable with the Linux comm
   
   Why is 'chroot' command especially relevant for Chainguard images?
 
-### `chroot` – 
-
-  - `chroot` – Run a command with a different root directory  
-    This is used to "jail" a process in a different filesystem view. Common in minimal container-like setups, or Linux-from-scratch systems. Requires root access and caution.
 </details>
 
 
