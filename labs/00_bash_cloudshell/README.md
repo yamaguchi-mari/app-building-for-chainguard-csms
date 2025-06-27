@@ -666,7 +666,7 @@ Also, how can Team Member 2 tell that `usr/sbin` is a 'soft link' to `usr/bin`?
   <summary> 
   <strong>Self-Study and/or Extra Credit</strong></summary>
 
-More notes on directories and the filesystem
+More notes on directories and the filesystems
 
 An Unusual Class Convention:
 
