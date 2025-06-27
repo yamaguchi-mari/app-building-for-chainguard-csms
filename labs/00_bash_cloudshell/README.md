@@ -24,11 +24,102 @@ This reference is designed to help beginners get comfortable with the Linux comm
 - `mkdir` – Make a new directory
 - `touch` – Create an empty file
 - `cat` – Display the contents of a file in the terminal window
-- `echo` – Print text or variables to the terminal window
 - `man` – Show the manual/help for a command
 - `wget` - Download files from the web
 - `chmod` – Change permissions on a file or folder
 - `chown` – Change ownership of a file or folder
+
+
+<details>
+  <summary> 
+  <strong>Gnu/Linux Commands as they apply to Chainguard</strong></summary>
+# 🧭 Essential GNU/Linux Commands for Chainguard Reps
+
+### `cd` – Change Directory  
+**What it does:** Moves you into a different directory (folder) on the system.  
+**Why it matters:** Useful when you’re navigating through a customer's file structure to examine or verify configuration, logs, or policy files (e.g., moving into `/etc/` or `/var/log/`).
+
+---
+
+### `ls` – List Directory Contents  
+**What it does:** Shows files and directories in your current location.  
+**Why it matters:** Helps you quickly verify whether expected files (like SBOMs, container configs, or policy manifests) are present.
+
+---
+
+### `pwd` – Print Working Directory  
+**What it does:** Displays the full path of your current directory.  
+**Why it matters:** Ensures you’re operating in the right folder—especially important when you're guiding customers through secure paths in container environments.
+
+---
+
+### `cp` – Copy Files and Directories  
+**What it does:** Makes a copy of files or directories.  
+**Why it matters:** Handy when instructing customers to back up config files before making changes (e.g., `cp policy.yaml policy.yaml.bak`).
+
+---
+
+### `mv` – Move or Rename Files and Directories  
+**What it does:** Moves or renames a file or folder.  
+**Why it matters:** Frequently used when helping clients rename policy files or move artifacts to specific directories for processing.
+
+---
+
+### `rm` – Remove Files or Directories  
+**What it does:** Deletes files or folders. Use `-r` for directories.  
+**Why it matters:** Critical for cleaning up unused files, especially when working with ephemeral containers or debugging customer environments. **Caution:** Irreversible.
+
+---
+
+### `mkdir` – Make Directories  
+**What it does:** Creates a new directory.  
+**Why it matters:** Often used when customers need to create structured paths for storing policy sets, logs, or cache outputs.
+
+---
+
+### `touch` – Create an Empty File  
+**What it does:** Creates a blank file.  
+**Why it matters:** Helps simulate file presence (e.g., a placeholder for a lockfile or test config) when replicating customer scenarios.
+
+---
+
+### `cat` – Display File Contents  
+**What it does:** Outputs a file’s contents to the terminal.  
+**Why it matters:** Useful when reviewing small config files or YAML manifests with customers during support or troubleshooting.
+
+---
+
+### `echo` – Print Text or Variables  
+**What it does:** Displays text or variable values.  
+**Why it matters:** Commonly used in scripting or quickly showing the value of environment variables relevant to image signing or scanning.
+
+---
+
+### `man` – Manual for Commands  
+**What it does:** Shows detailed help and options for a command.  
+**Why it matters:** Ideal for reps who want to confidently explain command-line options to customers or verify syntax before suggesting fixes.
+
+---
+
+### `wget` – Download Files from the Web  
+**What it does:** Retrieves files from the internet using a URL.  
+**Why it matters:** Can be used to fetch tools, test files, or sample SBOMs to help replicate or verify customer issues.
+
+---
+
+### `chmod` – Change Permissions  
+**What it does:** Modifies who can read, write, or execute a file or folder.  
+**Why it matters:** Key when ensuring scripts or binaries have the right access—like making a downloaded `chainguard` CLI tool executable.
+
+---
+
+### `chown` – Change File Ownership  
+**What it does:** Changes who owns a file or folder.  
+**Why it matters:** Relevant when resolving permission issues in container mounts or Docker volume paths where ownership mismatches can break tooling.
+
+</details>
+
+---
 
 
 <details>
@@ -464,7 +555,7 @@ Now make sure you can really call the binary/command:
 chainctl_linux_x86_64 --help
 ```
 
-> Note: If you get the help menu for the chainctl utility, it worked!
+> Note: If you get the help menu for the chainctl utility, it worked! You successfully installed a package (executable binary file) just as well as a package manager does.
 
 
 This stuff comes up more than we think...
