@@ -456,6 +456,7 @@ Try again with `sudo` in front of the command:
 ```bash
 sudo mv chainctl_linux_x86_64 /usr/local/bin/
 ```
+> Note: 'sudo' command elevates your user privileges to 'root' or 'admin' level, you can do anything
 
 Now make sure you can really call the binary/command:
 
@@ -466,10 +467,95 @@ chainctl_linux_x86_64 --help
 > Note: If you get the help menu for the chainctl utility, it worked!
 
 
-This stuff comes up more than we'd like to think...
+This stuff comes up more than we think...
 
 ![image](Dale-Paths-Convo.png)
 
+[Link to full slack convo](https://chainguard-dev.slack.com/archives/C04PYHWPE1F/p1750880117172019)
+
+<details>
+  <summary> 
+  <strong>Advanced, "ask AI" questions</strong></summary>
+Context: 
+
+Here's a thread about /usr/bin and usr/sbin, soft links, and the contents of the $PATH env var between some technical team members at Chainguard. 
+
+I am new to Linux but work at Chainguard with technical customers.
+
+Q:
+
+Can you explain this conversation to me?
+
+Thread:
+
+Team Member 1:
+Any reason why the /usr/bin is not in our environment variables for our node image and others?
+
+I had a prospect who was testing node, and he was saying he install yarn via CA, but the binary was in /usr/bin but not in the path.
+I had the same issue with a ruby customer also, trying to find bundler
+
+
+Team Member 2:
+
+It looks like /usr/sbin is a soft link to /usr/bin
+And /usr/sbin is in the path so anything in /usr/bin should effectively be in the path because of this.
+
+Command:
+
+```bash
+/usr $ ls -la /usr
+```
+
+
+Result:
+
+```
+total 40
+drwxr-xr-x  1 root   root     4096 May 1 2024 .
+drwxr-xr-x  1 root   root     4096 Jun 25 22:20 ..
+drwxr-xr-x  1 root   root     4096 Jun 17 13:28 bin
+drwxr-xr-x  1 root   root     4096 Jun 10 21:05 include
+drwxr-xr-x  1 root   root     4096 Jun 8 16:23 lib
+lrwxrwxrwx  1 root   root       3 Mar 31 13:08 lib64 -> lib
+drwxr-xr-x  1 root   root     4096 Jun 16 20:24 libexec
+drwxr-xr-x  1 root   root     4096 May 28 13:35 local
+drwx------  1 man   man      4096 Jan 1 1970 man
+lrwxrwxrwx  1 root   root       3 Mar 31 13:08 sbin -> bin
+drwxr-xr-x  1 root   root     4096 May 1 2024 share
+drwxr-xr-x  1 root   root     4096 Jun 17 13:28 x86_64-pc-linux-gnu
+/usr $ printenv
+HOSTNAME=d88fa38a25de
+SHLVL=1
+HOME=/home/node
+OLDPWD=/usr/sbin
+SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+TERM=xterm
+PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin
+NPM_CONFIG_UPDATE_NOTIFIER=false
+PWD=/usr
+
+```
+
+4:24
+yep if i copy a new binary to /usr/bin it seems to be in the path
+
+```
+/app # cp /usr/bin/wget /usr/bin/wget2
+/app # wget2 
+wget2: missing URL
+Usage: wget2 [OPTION]... [URL]...
+
+Try `wget2 --help' for more options.
+```
+
+End of thread
+
+
+Q:
+
+Also, how can Team Member 2 tell that `usr/sbin` is a 'soft link' to `usr/bin`?
+
+</details>
 
 #### End of Lab
 
