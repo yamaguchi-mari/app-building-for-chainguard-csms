@@ -32,101 +32,87 @@ cd ~/chainguard-app-building
 
 ### Get Started (Authentication)
 
-##### SSH Agent
+Create a new key if necessary
 
-`ssh-agent` makes it easier to manage password-protected SSH keys.
-
-You don't want to be prompted for the decryption pass-phrase every time you use your password-protected personal private key.  So you're going to start an `ssh-agent` session, like this:
-
-```shell
-eval $( ssh-agent )
-```
-
-This loads `ssh-agent` in the background and facilitates SSH connections
-
-##### Set up [SSH keys](https://docs.gitlab.com/ce/gitlab-basics/create-your-ssh-keys.html)
-
-```shell
-# Check for an existing SSH key
-# (You should not have one in Cloud Shell; this should error)
-ls -l ~/.ssh
-
-# Create a new key if necessary
-# Use the default location
-# Add a passphrase when requested
+```bash
 ssh-keygen
+```
 
-# Verify the key was created
+Verify the key was created
+
+```bash
 ls -l ~/.ssh
 ```
 
-Example:
+It should like like this:
 
-```
-osadmin@SFS-Eoan:~/sfs$ ls -l ~/.ssh
-total 0
-osadmin@SFS-Eoan:~/sfs$ ssh-keygen
-Generating public/private rsa key pair.
-Enter file in which to save the key (/home/osadmin/.ssh/id_rsa):
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in /home/osadmin/.ssh/id_rsa.
-Your public key has been saved in /home/osadmin/.ssh/id_rsa.pub.
-The key fingerprint is:
-SHA256:FFIqgARUVKCHZsPFUKiu5deedfWgT5iq1rxzLEx8xsE osadmin@SFS-Eoan
-The key's randomart image is:
-+---[RSA 3072]----+
-|      blah       |
-+----[SHA256]-----+
-osadmin@SFS-Eoan:~/sfs$ ls -l ~/.ssh
-total 8
+```bash
+total ...
 -rw------- 1 osadmin osadmin 2602 Jan  9 11:54 id_rsa
 -rw-r--r-- 1 osadmin osadmin  570 Jan  9 11:54 id_rsa.pub
 ```
 
-Now run `ssh-add` to load your key into your background `ssh-agent`
-```bash
-ssh-add
-```
-Because you added a passphrase to your key, you'll have to enter it now (but never again for the remainder of your session!)
+OR like this:
 
-Find the contents of your public key:
+```bash
+total 32
+-rw-------  1 anthony.sayre  staff  444 Jun  1 22:17 id_ed25519
+-rw-r--r--  1 anthony.sayre  staff  127 Jun  1 22:17 id_ed25519.pub
+```
+
+In either case, we want the contents of the `.pub` file:
 
 ```bash
 cat ~/.ssh/id_rsa.pub
 ```
 
-You should see something like:
+OR:
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
 
 ```
-ssh-rsa aBunchOfStuffHere!...........................@AnthonySayres-MacBook-Pro.local
+ssh-ed25520 aBunchOfStuffHere!ZDI1NTE5AAA.........@AnthonySayres-MacBook-Pro.local
 ```
 
 ---
 
-### Adding Your SSH Key to GitLab
+### Adding Your SSH Key to GitHub
 
-Adding your SSH key to GitLab allows you to easily authenticate with gitlab.com and interact with repositories using your unique identity.
+Adding your SSH key to GitHub allows you to easily authenticate with github.com and interact with repositories using your unique identity.
 
-Log in to [GitLab](https://www.gitlab.com), navigate to the [SSH Keys tab of your profile settings](https://gitlab.com/-/profile/keys), and add the contents of your `id_rsa.pub` file as a new key.
+Log in to [GitHub](https://github.com/login.), navigate to the [SSH Keys tab of your profile settings](https://github.com/settings/keys), click **New SSH key** button and add the contents of your `.pub` file as a new key.
   - Optional, but recommended for class:
-    - Set the title to `Intro2DevOps` and set the key to expire one week from now
+    - Set the title to `app bldg for cs` and give the key an expiration
     - Alternatively, you can set the title to `your_name@cloudshell` and choose an expiration of your liking (or not)
 
-![image](ssh_key.png?)
+![image](ssh_key2.png?)
 
 
 ##### Personal Access Token
 
-While an SSH key will allow you to interact with repositories on gitlab.com, an access token will allow you to interact with the GitLab API.  
+While an SSH key will allow you to interact with repositories on github.com, an access token will allow you to interact with the GitHub API.  
 
-Add a [personal access token](https://gitlab.com/-/profile/personal_access_tokens) with API Scope to your GitLab account settings.
+Again, ensure you are logged into GitHub, and navigate [personal access token](https://github.com/settings/tokens). 
 
-![image](PAT1.png?)
+'Developer settings' --> 'Personal access tokens' --> 'Generate new token (classic)' from the dropdown
 
-When you create the token, the page will reload and you will see this _once_.  If you don't copy it now, you'll have to delete and recreate it.  
+![image](classic-api-token.png?)
 
-![image](PAT2.png?)
+Choose these permissions for the token, give it an exporation date (make this one short lived, 1-3 months maybe?)
+
+![image](classic-api-token-settings.png?)
+
+Scroll to the bottom and click the green 'Generate token' button
+
+New token will generate, copy it to a text file.
+> Note: You will only see this token once in the GH UI
+
+```bash
+open -a TextEdit 
+```
 
 Add **your** token to your `~/.zshrc`
 
@@ -140,7 +126,7 @@ Add the following at the bottom of the file and save:
 
 ```bash
 # Don't add this token.  This is Teacher's.  Add YOUR token.
-export GITHUB_API_TOKEN="vzN...ycc"
+export GITHUB_API_TOKEN="ghp_vzN...ycc"
 ```
 
 Load your update and make sure you can see the token:
@@ -153,12 +139,15 @@ echo $GITHUB_API_TOKEN
 You should see this:
 
 ```
-anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/sfs$ source ~/.zshrc
-anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/sfs$ echo $GITHUB_API_TOKEN
-vzN7Y2ynrydvo4WFNycc
-
-# You won't see this; you'll see YOUR token, right?  :)
+source ~/.zshrc
+echo $GITHUB_API_TOKEN
+ghp_vzN...ycc
 ```
+> Note: You won't see this exact value; you'll see YOUR token, right?  :)
+
+As long as you see your token you can move on to the next step
+
+
 
 <!--
 - _Note: We created that `.env` file to store environment, but we're going to keep that for application-specific environmental management.  We will use the `.zshrc` file for user-specific configuration._
