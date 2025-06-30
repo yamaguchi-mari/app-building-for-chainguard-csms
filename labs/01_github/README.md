@@ -1,10 +1,10 @@
 # GitHub
 
 *By the end of this lab, you will:*
-1. Setup SSH keys and use them to configure gitlab
-1. Create and clone a new gitlab repo
-1. Commit and push to your new gitlab repo
-1. Clone an existing gitlab repo
+1. Setup SSH keys and use them to configure github
+1. Create and clone a new github repo
+1. Commit and push to your new github repo
+1. Clone an existing github repo
 1. Create a new git repo
 
 ---
@@ -79,7 +79,9 @@ ssh-ed25520 aBunchOfStuffHere!ZDI1NTE5AAA.........@AnthonySayres-MacBook-Pro.loc
 
 ---
 
-### Adding Your SSH Key to GitHub
+## Add Your SSH Key to GitHub
+
+- For git/GitHub repo cloning, push/pull updates etc... 
 
 Adding your SSH key to GitHub allows you to easily authenticate with github.com and interact with repositories using your unique identity.
 
@@ -91,28 +93,48 @@ Log in to [GitHub](https://github.com/login.), navigate to the [SSH Keys tab of 
 ![image](ssh_key2.png?)
 
 
-##### Personal Access Token
+Click 'Add new SSH key' button
 
-While an SSH key will allow you to interact with repositories on github.com, an access token will allow you to interact with the GitHub API.  
+You should now be able to use your local Git with your GitHub account
 
-Again, ensure you are logged into GitHub, and navigate [personal access token](https://github.com/settings/tokens). 
+Test the connection:
 
-'Developer settings' --> 'Personal access tokens' --> 'Generate new token (classic)' from the dropdown
+```bash
+ssh -T git@github.com
+```
+
+If you see the below message, you've succeeded in SSH integration with GitHub:
+
+```
+Hi <GH account name> You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+
+
+## Create a Personal Access Token (for API)
+
+While an SSH key will allow you to interact with repositories on github.com, an access token will allow you to do alot more than that uisng the GitHub API. 
+
+Again, ensure you are logged into GitHub, and navigate to [personal access token](https://github.com/settings/tokens) page. 
+
+**'Personal access tokens'** --> **'Generate new token (classic)'** from the dropdown
 
 ![image](classic-api-token.png?)
 
-Choose these permissions for the token, give it an exporation date (make this one short lived, 1-3 months maybe?)
+Choose the below permissions for the token, default token expiration date should be ok.
 
 ![image](classic-api-token-settings.png?)
 
-Scroll to the bottom and click the green 'Generate token' button
+Scroll to the bottom and click the 'Generate token' button
 
 New token will generate, copy it to a text file.
+
 > Note: You will only see this token once in the GH UI
 
 ```bash
 open -a TextEdit 
 ```
+
 
 Add **your** token to your `~/.zshrc`
 
@@ -141,34 +163,33 @@ You should see this:
 ```
 source ~/.zshrc
 echo $GITHUB_API_TOKEN
-ghp_vzN...ycc
+ghp_vzNjcsofhafeo668qsl..ycc
 ```
 > Note: You won't see this exact value; you'll see YOUR token, right?  :)
 
-As long as you see your token you can move on to the next step
+### Once you verify the token is captured in the variable you have completed this step
 
-
-
-<!--
-- _Note: We created that `.env` file to store environment, but we're going to keep that for application-specific environmental management.  We will use the `.zshrc` file for user-specific configuration._
--->
 
 ---
 
 ### GitHub API
 
-Use the GitLab API to create a new repository
+Use the GitHub API to create a new repository
 
 ```bash
 curl \
   -X POST \
-  -H "PRIVATE-TOKEN: ${GITHUB_API_TOKEN}" \
-  -d "name=MyPracticeRepo" \
-  -d "initialize_with_readme=true" \
-  -d "default_branch=main" \
-  "https://github.com/api/v4/projects" \
+  -H "Authorization: token ${GITHUB_API_TOKEN}" \
+  -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/user/repos \
+  -d '{
+    "name": "MyWebServer",
+    "auto_init": true,
+    "private": false
+  }' \
   | tee ~/chainguard-app-building/repo_metadata.json
 ```
+
 
  Piping that `curl` output to `tee` displays the results in the terminal as well as storing them in the `repo_metadata.json` file.  (We're going to use this file **a lot** throughout the rest of this class.) 
 
@@ -183,7 +204,7 @@ With `jq`, the results are much more readable:
 ```bash
 cat ~/chainguard-app-building/repo_metadata.json | jq
 # or
-cat ~/chainguard-app-building/repo_metadata.json | jq '.ssh_url_to_repo'
+cat ~/chainguard-app-building/repo_metadata.json | jq '.url'
 ```
 
 Clone the repository locally:
