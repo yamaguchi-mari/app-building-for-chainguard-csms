@@ -48,8 +48,8 @@ It should like like this:
 
 ```bash
 total ...
--rw------- 1 osadmin osadmin 2602 Jan  9 11:54 id_rsa
--rw-r--r-- 1 osadmin osadmin  570 Jan  9 11:54 id_rsa.pub
+-rw------- 1 anthony.sayre  staff 444 Jan  1 22:17 id_rsa
+-rw-r--r-- 1 anthony.sayre  staff 127 Jan  1 22:17 id_rsa.pub
 ```
 
 OR like this:
@@ -74,7 +74,7 @@ cat ~/.ssh/id_ed25519.pub
 
 
 ```
-ssh-ed25520 aBunchOfStuffHere!ZDI1NTE5AAA.........@AnthonySayres-MacBook-Pro.local
+ssh-ed25519 aBunchOfStuffHere!ZDI1NTE5AAA.........@AnthonySayres-MacBook-Pro.local
 ```
 
 ---
@@ -204,17 +204,17 @@ With `jq`, the results are much more readable:
 ```bash
 cat ~/chainguard-app-building/repo_metadata.json | jq
 # or
-cat ~/chainguard-app-building/repo_metadata.json | jq '.url'
+cat ~/chainguard-app-building/repo_metadata.json | jq '.ssh_url'
 ```
 
 Clone the repository locally:
 
 ```bash
 cd ~/chainguard-app-building
-git clone $(jq -r '.ssh_url_to_repo' repo_metadata.json) mypracticerepo
+git clone $(jq -r '.ssh_url' repo_metadata.json)
 # If you see the following prompt, type `yes`:
 #   Are you sure you want to continue connecting (yes/no)?
-cd mypracticerepo
+cd MyWebServer
 ```
 
 You should see this:
