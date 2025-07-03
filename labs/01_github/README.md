@@ -121,7 +121,9 @@ Again, ensure you are logged into GitHub, and navigate to [personal access token
 
 ![image](classic-api-token.png?)
 
-Choose the below permissions for the token, default token expiration date should be ok.
+Choose the below permissions for the token
+
+> IMPORTANT: set an early expiration date for this token (for security hygiene purposes)
 
 ![image](classic-api-token-settings.png?)
 
@@ -134,7 +136,6 @@ New token will generate, copy it to a text file.
 ```bash
 open -a TextEdit 
 ```
-
 
 Add **your** token to your `~/.zshrc`
 
@@ -229,13 +230,13 @@ anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/cha
 
 ---
 
-#### Why API?
+Q: What did we just do?
 
-Using Application Programming Interfaces (API's) allow us to control services without clicking around a user interface.  In this case, we're not passing any arguments when we create the repo.  But we could.  If you want to standardize all the repositories for your organization, using the API will ensure a faster, more consistent process.
+A: We created a new repo at GitHub, then cloned the new (empty) repo locally
 
-![image](create_repo_gitlab.png?)
+![image](create_repo_github.png?)
 
-![image](git_clone_repo_gitlab.png?)
+![image](git_clone_repo_github.png?)
 
 ---
 

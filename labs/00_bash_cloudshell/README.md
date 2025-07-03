@@ -482,9 +482,9 @@ Let's try to install this using a commands that can work without OS specific pac
 
 Go to your [Chainguard Google account](https://console.cloud.google.com/) and sign-in
 
-Click to activate your Google Cloud Shell:
+Click to activate your Google Cloud Shell (upper right corner):
+
 ![image](google-cloud-shell.png?)
-> Note: Upper right corner
 
 
 Enter this command at the cloud shell prompt:
