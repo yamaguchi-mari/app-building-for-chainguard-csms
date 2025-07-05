@@ -10,17 +10,17 @@ By the end of this lab, you will:
 
 ---
 
-## 📁 Module 1: Filesystem Navigation
+## Module 1: Filesystem Navigation
 
-### 🔍 Concept Overview
+### Concept Overview
 Linux systems organize data in hierarchical directories. Mastering navigation is essential.
 
-### 📖 Key Terms
+### Key Terms
 - **Directory**: Folder on a system (`/etc`, `/home`)
 - **Path**: Location of a file or directory
 - **Home (`~`)**: Your personal directory
 
-### 🧪 Commands: Navigate and Explore
+### Commands: Navigate and Explore
 ```bash
 pwd                # Show current directory
 cd ../..           # Move up two levels
@@ -36,7 +36,7 @@ ls -la             # Detailed listing
 cd /Users/<your_user_name>  # Return home
 pwd
 ```
-💡 **Tip:** Use `<Tab>` for path autocompletion.
+**Tip:** Use `<Tab>` for path autocompletion.
 
 [The Linux File Hierarchy Structure (LFHS):](https://www.linuxtrainingacademy.com/linux-directory-structure-and-file-system-hierarchy/)
 
@@ -46,9 +46,9 @@ pwd
 
 ---
 
-## 📄 Module 2: File Operations
+## Module 2: File Operations
 
-### 🔍 Concept Overview
+### Concept Overview
 Everything in Linux is a file. Viewing, creating, moving, deleting files is foundational. 
 
 Managing permissions on files and spinning up running services from files are also important.
@@ -59,7 +59,7 @@ It's the same/similar file system everywhere:
 
 > Note: A CI pipeline is a Linux server, running a CI program/service. A firewall is a Linux server, running a firewall program/service. A Mac laptop is a Linux"ish" server, running many programs/services. A production k8s cluster manages containers, most of which are mini-Linux servers, ideally running only one program each (micro-services).
 
-### 🧪 Commands: Creating and Managing Files
+### Commands: Creating and Managing Files
 ```bash
 cd ~
 mkdir chainguard-app-building
@@ -75,13 +75,13 @@ rm greetings_copy.txt  # Caution: irreversible
 
 ---
 
-## 🔑 Module 3: Permissions & Variables
+## Module 3: Permissions & Variables
 
 ### 📖 Key Concepts
 - **Permissions**: Who can read/write/execute
 - **Environment Variable**: Stores session config like usernames
 
-### 🧪 Commands
+### Commands
 ```bash
 cd ~/chainguard-app-building
 echo "echo Hello Chainguard!" > greet.sh
@@ -99,7 +99,7 @@ env
 # Is your new custom variable listed there?
 ```
 
-### 🔄 Make Variables Persistent
+### Make Variables Persistent
 ```bash
 echo 'export MACGUFFIN=<change me>' >> ~/.zshrc
 source ~/.zshrc
@@ -110,9 +110,9 @@ echo $MACGUFFIN
 
 ---
 
-## 🔧 Module 4: Install Chainctl (Chainguard CLI)
+## Module 4: Install Chainctl (Chainguard CLI)
 
-### 🔍 Concept Overview
+### Concept Overview
 
 You probably already installed chainctl on your work laptop using `brew`
 
@@ -128,13 +128,13 @@ But we don't want to do it our local environment (we already have chainctl insta
 
 Lets go to [Google Cloud Shell](https://console.cloud.google.com/) (authentication w/ Ubikey required)
 
-Click the cloud shell link to activate:
+Click the cloud shell link to  (upper right corner of UI):
 
 ![image](google-cloud-shell.png?)
 
 > Note: Google Cloud Shell is running in yet another Linux File Directory very similar to the one on your laptop. When it comes up, run the below commands to install `chainctl`
 
-### 🧪 Commands: Manual Install in Cloud Shell
+### Commands: Manual Install in Cloud Shell
 ```bash
 # Confirm you are in the home directory of your new local development environment:
 pwd
@@ -174,9 +174,9 @@ chainctl_linux_x86_64 --help  # Should show help
 
 ---
 
-## 🎓 Module 5: Shortcuts & Command History
+## Module 5: Shortcuts & Command History
 
-### 🛠️ Terminal Tricks
+### Terminal Tricks
 ```bash
 cd ~/chai<Tab>     # Tab to autocomplete
 Ctrl + R           # Search history
@@ -187,7 +187,7 @@ sudo               # Raise privileges of User before executing command
 
 ---
 
-## 📚 Appendix: Key Linux Terms
+## Appendix: Key Linux Terms
 
 - **Terminal**: Interface for typing commands
 - **Shell**: Command interpreter (e.g., Bash, Zsh)
