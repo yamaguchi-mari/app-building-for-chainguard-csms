@@ -184,7 +184,7 @@ curl \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/user/repos \
   -d '{
-    "name": "MyWebServer",
+    "name": "mywebserver",
     "auto_init": true,
     "private": false
   }' \
@@ -212,30 +212,45 @@ Clone the repository locally:
 
 ```bash
 cd ~/chainguard-app-building
+
 git clone $(jq -r '.ssh_url' repo_metadata.json)
-# If you see the following prompt, type `yes`:
-#   Are you sure you want to continue connecting (yes/no)?
-cd MyWebServer
+
+cd mywebserver
 ```
 
-You should see this:
+> Note: Now is a good time to ensure you did all this right. Use `ls` and `pwd`
 
+Pwd command:
+```bash
+pwd
 ```
-anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/chainguard-app-building$ git clone $(jq -r '.ssh_url_to_repo' repo_metadata.json)
-Cloning into 'mypracticerepo'...
-warning: You appear to have cloned an empty repository.
-anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/chainguard-app-building$ cd mypracticerepo
-anthony.sayre@AnthonySayres-MacBook-Pro app-building-for-chainguard-tsms % ~/chainguard-app-building/mypracticerepo$
+
+Should yield this result:
+
+`/Users/<your.user.name>/chainguard-app-building`
+
+Ls command:
+
+```bash
+ls
 ```
+
+Should yield this result:
+
+
+`mywebserver		repo_metadata.json`
 
 ---
 
 Q: What did we just do?
 
-A: We created a new repo at GitHub, then cloned the new (empty) repo locally
+A: We created a new repo at GitHub using one automation friendly method (API). Then cloned the new empty repo locally using another automation friendly method (SSH)
 
+
+Method 1: API to create/delete/edit
 ![image](create_repo_github.png?)
 
+Method 2: Git and SSH to  clone/push/pull
 ![image](git_clone_repo_github.png?)
 
 ---
@@ -247,13 +262,15 @@ A: We created a new repo at GitHub, then cloned the new (empty) repo locally
 When working with a Git repository, there's a very standard workflow:
 
 1. Change files
-  - Make any changes you want to any files you want
+  - Make any changes you want to any files you want (in a git initiatied folder)
   - Small batches of changes are better than big batches
 2. Stage files
   - `git add ...`
   - This allows you to select which files you want to include in your next commit
 3. Commit files
+  - `git commit -m "commit notes..."`
 4. Push commit
+  - `git push`
 
 ---
 
@@ -274,7 +291,7 @@ Make your first commit:
 
 ```bash
 # Get to the right spot
-cd ~/chainguard-app-building/mypracticerepo
+cd ~/chainguard-app-building/mywebserver
 
 # Create a new file
 echo "hello world" > demofile
@@ -355,7 +372,10 @@ The `git init` line tells git to start tracking this folder as a repository.  It
 
 ---
 
-### Now lets apply this to a *'real'* application...
+### Git Clone this class material
+
+
+
 
 ### Clone an insecure website
 
@@ -375,15 +395,15 @@ curl \
   -d "name=Goof" \
   -d "initialize_with_readme=false" \
   -d "default_branch=main" \
-  "https://gitlab.com/api/v4/projects" \
+  "https://github.com/api/v4/projects" \
   | tee ~/chainguard-app-building/repo_metadata_goof.json
 ```
 
 > **Q:** What did the **tee** command above just do?
 
-Go to your GitLab UI and find the empty repo you just created
+Go to your GitHub UI and find the empty repo you just created
 
-### Redirect the recently cloned GitHub repo to your newly created GitLab repo 
+### Redirect the recently cloned GitHub repo to your newly created GitHub repo 
 
 ```shell
 cd ~/chainguard-app-building/goof/
@@ -397,7 +417,7 @@ git remote -v
 # change remote repo origin 
 git remote set-url origin $(jq -r '.ssh_url_to_repo' ~/chainguard-app-building/repo_metadata_goof.json )
 
-# reverify where the repo is now set to push to (should now show a GitLab repo instead of GitHub) 
+# reverify where the repo is now set to push to (should now show a GitHub repo instead of GitHub) 
 git remote -v
 
 # push it!

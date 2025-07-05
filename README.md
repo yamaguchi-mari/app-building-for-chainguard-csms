@@ -1,5 +1,24 @@
 # App Building for Chainguard TSMs
 
+Purpose of this class material is to soft ramp foundational computer concepts for technical facing Chainguard ICs and managers, in workshop format.
+
+Q: Why?
+
+A: Hands-on experience helps with credibility when dealing with technical clients. And a little goes a long way. 
+
+Bridging the gap between business concerns and technical concerns is valuable to our clients while keeping the main focus on relationships and account management.
+
+Immersing in the technical side just a little more makes it much easier to get tha credibility and increase overall Chainguard value without adding more head count.
+
+
+
+Relevant Examples:
+
+Trouble-shooting: [Will Kontizer's Container Security Dashboard](https://github.com/wkonitzer/container-security-dashboard?tab=readme-ov-file#notes--troubleshooting)
+
+
+Conversation's about 
+
 ---
 
 ### Class Goal
@@ -22,11 +41,6 @@ Be familiar with underlying concepts like bach commands, git, docker, package ma
 
 ***
 
-### Following Instructions
-
-Please follow the documented and stated instructions as closely as possible.  This will help mitigate issues that arise due to funky configurations.  As mentioned above, we'll be stitching together a number of tools.  This means that the labs are very inter-dependent, and an innocent deviation in an early lab could complicate a later lab.
-
-I encourage all students to experiment and explore the material.  Making it your own and having fun with it will probably increase the functional utility of this class immensely.  I'm happy to help with any extracurricular questions and/or interests related to the material, but please try the extra stuff after completing the suggested stuff.  And maybe in a different subdirectory.  :)
 
 ***
 
