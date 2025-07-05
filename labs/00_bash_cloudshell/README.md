@@ -138,12 +138,28 @@ Click the cloud shell link to activate:
 ```bash
 # Confirm you are in the home directory of your new local development environment:
 pwd
-# Download 
+
+# Download the binary
 wget https://dl.enforce.dev/chainctl/latest/chainctl_linux_x86_64
 
+# Review permissions of the binary you just downloaded
+ls -l
+
+#You should see someting like this:
+# total 92720
+# -rw-rw-r-- 1 anthony_sayre anthony_sayre 94933176 Jul  4 20:08 chainctl_linux_x86_64
+# -rwxr-xr-x 1 anthony_sayre anthony_sayre      913 Jul  5 16:17 README-cloudshell.txt
+# drwxrwxr-x 2 anthony_sayre anthony_sayre     4096 Jun 24 13:40 test
+
+# The binary we just downloaded does not have any Xs in its permissions
 chmod +x chainctl_linux_x86_64
 sudo mv chainctl_linux_x86_64 /usr/local/bin/
-chainctl_linux_x86_64 --help  # Should show help menu
+chainctl_linux_x86_64 --help  # Should show help 
+
+# Review the binary's permissions again:
+ls -l
+
+# Are there Xs in the pemrissions section?
 ```
 
 > End of module
