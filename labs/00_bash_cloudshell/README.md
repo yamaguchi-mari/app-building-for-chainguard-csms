@@ -120,13 +120,27 @@ You probably already installed chainctl on your work laptop using `brew`
 brew install chainctl
 ```
 
-As an SRE, you probably can't rely on `brew`
+Technical clients running production systems may not always be able rely on package managers for individual OSs like `brew`.
 
 Let's install a CLI tool without a package manager, using a more universal method `wget`.
 
+But we don't want to do it our local environment (we already have chainctl installed there).
+
+Lets go to [Google Cloud Shell](https://console.cloud.google.com/) (authentication w/ Ubikey required)
+
+Click the cloud shell link to activate:
+
+![image](google-cloud-shell.png?)
+
+> Note: Google Cloud Shell is running in yet another Linux File Directory very similar to the one on your laptop. When it comes up, run the below commands to install `chainctl`
+
 ### 🧪 Commands: Manual Install in Cloud Shell
 ```bash
+# Confirm you are in the home directory of your new local development environment:
+pwd
+# Download 
 wget https://dl.enforce.dev/chainctl/latest/chainctl_linux_x86_64
+
 chmod +x chainctl_linux_x86_64
 sudo mv chainctl_linux_x86_64 /usr/local/bin/
 chainctl_linux_x86_64 --help  # Should show help menu
@@ -145,13 +159,6 @@ Ctrl + R           # Search history
 !!                 # Re-run last command
 !$                 # Use last argument of previous command
 sudo               # Raise privileges of User before executing command 
-```
-
-### 🧠 Self-Study (Optional)
-```bash
-mkdir -p ~/chainguard-app-building/mywebserver/deploy/
-touch ~/chainguard-app-building/mywebserver/deploy/Chart.yaml
-open -a TextEdit ~/chainguard-app-building/mywebserver/deploy/Chart.yaml
 ```
 
 ---
