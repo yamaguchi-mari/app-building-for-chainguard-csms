@@ -153,13 +153,21 @@ ls -l
 
 # The binary we just downloaded does not have any Xs in its permissions
 chmod +x chainctl_linux_x86_64
-sudo mv chainctl_linux_x86_64 /usr/local/bin/
-chainctl_linux_x86_64 --help  # Should show help 
 
-# Review the binary's permissions again:
+# Review the binary's permissions after running 'chmod' command:
+ls -l
+# Are there Xs in the pemrissions section of the result? If so then move to the next step:
+
+sudo mv chainctl_linux_x86_64 /usr/local/bin/
+
+# We had to elevate our privileges to move a file into /usr/local/bin
+
+# Confirm it's not in our homer folder anymore:
 ls -l
 
-# Are there Xs in the pemrissions section?
+#Confirm the util works:
+chainctl_linux_x86_64 --help  # Should show help 
+
 ```
 
 > End of module
