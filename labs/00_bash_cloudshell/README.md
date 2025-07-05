@@ -162,7 +162,7 @@ sudo mv chainctl_linux_x86_64 /usr/local/bin/
 
 # We had to elevate our privileges to move a file into /usr/local/bin
 
-# Confirm it's not in our homer folder anymore:
+# Confirm it's not in our home folder anymore:
 ls -l
 
 #Confirm the util works:
