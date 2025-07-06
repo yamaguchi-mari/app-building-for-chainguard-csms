@@ -20,13 +20,21 @@ Linux systems organize data in hierarchical directories. Mastering navigation is
 - **Path**: Location of a file or directory
 - **Home (`~`)**: Your personal directory
 
+---
+
+[The Linux File Hierarchy Structure (LFHS):](https://www.linuxtrainingacademy.com/linux-directory-structure-and-file-system-hierarchy/)
+
+
+![image](linuxdir2.png?)
+
 ### Commands: Navigate and Explore
 ```bash
+cd ~               # Ensure you are in your home directory
 pwd                # Show current directory
 cd ../..           # Move up two levels
 pwd                # Verify location
 ls                 # List contents
-cd ~               # Go to home
+cd ~               # Go back to home
 cd ../../etc       # Navigate to /etc using relative path
 ls
 cat passwd         # View file contents
@@ -38,22 +46,18 @@ pwd
 ```
 **Tip:** Use `<Tab>` for path autocompletion.
 
-[The Linux File Hierarchy Structure (LFHS):](https://www.linuxtrainingacademy.com/linux-directory-structure-and-file-system-hierarchy/)
+Q: How could you read the passwd file in the /etc directory without having to navigate to the /etc directory?
 
-![image](linuxdir2.png?)
-
-> End of module
+> End of module when the above question is answered
 
 ---
 
-## Module 2: File Operations
+## Module 2: File Operations, Permissions & Variables
 
 ### Concept Overview
-Everything in Linux is a file. Viewing, creating, moving, deleting files is foundational. 
+Everything in Linux is a file. Being able to create, view, modify, and run files is a core part of working in a Linux environment. This module combines file operations with file permissions and environment variables to keep things practical and task-based.
 
-Managing permissions on files and spinning up running services from files are also important.
-
-It's the same/similar file system everywhere:
+It's the same/similar file directory everywhere:
 
 ![image](filesystems-allthewaydown2.png?)
 
@@ -64,29 +68,18 @@ It's the same/similar file system everywhere:
 cd ~
 mkdir chainguard-app-building
 cd ~/chainguard-app-building
-touch hello.txt
-cat hello.txt
-mv hello.txt greetings.txt
-cp greetings.txt greetings_copy.txt
-rm greetings_copy.txt  # Caution: irreversible
-```
 
-> End of module
+# Create a simple script file with a bash command inside
+echo '#!/bin/bash' > greet.sh
+echo 'echo "Hello world"' >> greet.sh
 
----
-
-## Module 3: Permissions & Variables
-
-### 📖 Key Concepts
-- **Permissions**: Who can read/write/execute
-- **Environment Variable**: Stores session config like usernames
-
-### Commands
-```bash
-cd ~/chainguard-app-building
-echo "echo Hello Chainguard!" > greet.sh
+# View and modify permissions
 ls -l greet.sh
 chmod +x greet.sh
+
+# View permissions again, do you see 'Xs' next to the greet.sh file?
+
+# Run the script
 ./greet.sh
 
 # Environment variables
@@ -97,20 +90,37 @@ echo $MACGUFFIN
 # Review all current environment variables in your OS:
 env
 # Is your new custom variable listed there?
-```
 
-### Make Variables Persistent
-```bash
-echo 'export MACGUFFIN=<change me>' >> ~/.zshrc
+# Put a variable in your greet.sh script
+echo 'echo "Hello $MACGUFFIN", aka $USER' > greet.sh
+
+# Make a backup copy of your .zshrc file
+cp ~/.zshrc ~/.zshrc.bak
+
+# Make a variable persistent
+echo 'export MACGUFFIN=<change me>' >> ~/.zshrc # .zshrc file is hidden in your $HOME directory and runs commands for you
+
+# Activate the change you made to the .zshrc file
 source ~/.zshrc
+
+# Ensure the change worked
 echo $MACGUFFIN
+
+# Run the greet.sh script again
+./greet.sh
+# Did the message change?
+
 ```
 
-> End of module
+Your terminal should have printed a message like this:
+
+> Hello $MACGUFFIN, aka $USER
+
+> If so you are done with this module
 
 ---
 
-## Module 4: Install Chainctl (Chainguard CLI)
+## Module 3: Install a binary (Chainctl)
 
 ### Concept Overview
 
@@ -120,19 +130,19 @@ You probably already installed chainctl on your work laptop using `brew`
 brew install chainctl
 ```
 
-Technical clients running production systems may not always be able rely on package managers for individual OSs like `brew`.
+Clients running production systems may not always be able rely on package managers for individual OSs like `brew`.
 
-Let's install a CLI tool without a package manager, using a more universal method `wget`.
+Let's install a CLI tool without a package manager, using a more universal method: `wget`.
 
-But we don't want to do it our local environment (we already have chainctl installed there).
+But we don't want to do it in our local environment (we already have chainctl installed there).
 
-Lets go to [Google Cloud Shell](https://console.cloud.google.com/) (authentication w/ Ubikey required)
+Go to [Google Cloud Shell](https://console.cloud.google.com/) (authentication w/ Ubikey required)
 
-Click the cloud shell link to  (upper right corner of UI):
+Click the cloud shell link to activate (upper right corner of UI):
 
 ![image](google-cloud-shell.png?)
 
-> Note: Google Cloud Shell is running in yet another Linux File Directory very similar to the one on your laptop. When it comes up, run the below commands to install `chainctl`
+> Note: Google Cloud Shell is running in yet another Linux File Directory, very similar to the one on your laptop. When the shell environment finishes b otting up, run the below commands to install `chainctl`
 
 ### Commands: Manual Install in Cloud Shell
 ```bash
@@ -174,7 +184,7 @@ chainctl_linux_x86_64 --help  # Should show help
 
 ---
 
-## Module 5: Shortcuts & Command History
+## Shortcuts & Command History
 
 ### Terminal Tricks
 ```bash
@@ -192,7 +202,7 @@ sudo               # Raise privileges of User before executing command
 - **Terminal**: Interface for typing commands
 - **Shell**: Command interpreter (e.g., Bash, Zsh)
 - **Prompt**: Where you type
-- **Root**: Admin user or top-level directory
+- **Root**: Admin user and/or top-level directory
 - **Service (daemon)**: Background process
 - **Package manager (OS)**: `apt`, `apk`
 - **Package manager (app)**: `npm`, `pip`
