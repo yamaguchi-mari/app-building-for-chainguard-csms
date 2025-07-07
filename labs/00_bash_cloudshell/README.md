@@ -111,9 +111,10 @@ echo $MACGUFFIN
 # Did the message change?
 ```
 
-Your terminal should have printed a message like this:
+> Note: Your terminal should have printed a message like this:
 
-> Hello $MACGUFFIN, aka $USER
+> "Hello world"
+> "And hello $MACGUFFIN, aka $USER"
 
 > If so you are done with this module
 
@@ -128,11 +129,10 @@ brew install shc
 shc -f greet.sh
 
 # Compare details of the text file vs the binary
-
 # Review the binary contents
 cat greet.sh.x 
 
-# Compare to the shell file contents:
+# Compare to the shell file contents
 cat greet.sh
 
 # Compare file metadata (including file size)
@@ -171,7 +171,7 @@ Click the cloud shell link to activate (upper right corner of UI):
 
 ![image](google-cloud-shell.png?)
 
-> Note: Google Cloud Shell is running in yet another Linux File Directory, very similar to the one on your laptop. When the shell environment finishes b otting up, run the below commands to install `chainctl`
+> Note: Google Cloud Shell is running in yet another Linux File Directory, very similar to the one on your laptop. When the shell environment finishes booting up, run the below commands to install `chainctl`
 
 ### Commands: Manual Install in Cloud Shell
 ```bash
@@ -180,6 +180,7 @@ pwd
 
 # Download the binary
 wget https://dl.enforce.dev/chainctl/latest/chainctl_linux_x86_64
+# wget is the command line equivalent to clicking the download button on a website
 
 # Review permissions of the binary you just downloaded
 ls -l
@@ -205,13 +206,13 @@ ls -l
 echo $PATH
 
 # Elevate your user privileges and then move the binary to a directory in the path
-sudo mv chainctl_linux_x86_64 /usr/local/bin/
+sudo mv chainctl_linux_x86_64 /usr/local/bin/chainctl
 
 # Confirm it's not in our home folder anymore:
 ls -l
 
 #Confirm the util works:
-chainctl_linux_x86_64 --help  # Should show help 
+chainctl --help  # Should show help 
 
 ```
 
@@ -221,7 +222,8 @@ chainctl_linux_x86_64 --help  # Should show help
 
 ## Shortcuts & Command History
 
-### Terminal Tricks
+### Terminal Tips & Tricks
+
 ```bash
 cd ~/chai<Tab>     # Tab to autocomplete
 Ctrl + R           # Search history
