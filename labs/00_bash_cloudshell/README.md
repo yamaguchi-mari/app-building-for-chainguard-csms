@@ -76,8 +76,8 @@ echo 'echo "Hello world"' >> greet.sh
 # View and modify permissions
 ls -l greet.sh
 chmod +x greet.sh
-
 # View permissions again, do you see 'Xs' next to the greet.sh file?
+ls -l
 
 # Run the script
 ./greet.sh
@@ -92,7 +92,7 @@ env
 # Is your new custom variable listed there?
 
 # Put a variable in your greet.sh script
-echo 'echo "Hello $MACGUFFIN", aka $USER' > greet.sh
+echo 'echo " And also hello $MACGUFFIN", aka $USER' >> greet.sh
 
 # Make a backup copy of your .zshrc file
 cp ~/.zshrc ~/.zshrc.bak
@@ -109,7 +109,6 @@ echo $MACGUFFIN
 # Run the greet.sh script again
 ./greet.sh
 # Did the message change?
-
 ```
 
 Your terminal should have printed a message like this:
@@ -117,6 +116,36 @@ Your terminal should have printed a message like this:
 > Hello $MACGUFFIN, aka $USER
 
 > If so you are done with this module
+
+<details>
+<summary><strong>Extra Credit - turn your script into a binary</strong></summary>
+
+```bash
+# Install a program that turns .sh text files into binaries
+brew install shc
+
+# Turn greet.sh into a binary
+shc -f greet.sh
+
+# Compare details of the text file vs the binary
+
+# Review the binary contents
+cat greet.sh.x 
+
+# Compare to the shell file contents:
+cat greet.sh
+
+# Compare file metadata (including file size)
+ls -lh greet*
+
+# Move your binary to a file in $PATH
+sudo mv greet.sh.x /usr/local/bin/greet
+
+# Test it
+greet
+
+```
+</details>
 
 ---
 
@@ -161,6 +190,10 @@ ls -l
 # -rwxr-xr-x 1 anthony_sayre anthony_sayre      913 Jul  5 16:17 README-cloudshell.txt
 # drwxrwxr-x 2 anthony_sayre anthony_sayre     4096 Jun 24 13:40 test
 
+# Try to run the binary:
+./chainctl_linux_x86_64
+# Did it run? Why or why not?
+
 # The binary we just downloaded does not have any Xs in its permissions
 chmod +x chainctl_linux_x86_64
 
@@ -168,9 +201,11 @@ chmod +x chainctl_linux_x86_64
 ls -l
 # Are there Xs in the pemrissions section of the result? If so then move to the next step:
 
-sudo mv chainctl_linux_x86_64 /usr/local/bin/
+# The path env
+echo $PATH
 
-# We had to elevate our privileges to move a file into /usr/local/bin
+# Elevate your user privileges and then move the binary to a directory in the path
+sudo mv chainctl_linux_x86_64 /usr/local/bin/
 
 # Confirm it's not in our home folder anymore:
 ls -l
