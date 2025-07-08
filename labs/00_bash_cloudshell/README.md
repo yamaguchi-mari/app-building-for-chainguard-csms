@@ -178,6 +178,10 @@ Click the cloud shell link to activate (upper right corner of UI):
 # Confirm you are in the home directory of your new local development environment:
 pwd
 
+# List out any files or subdirectories in the current directory
+ls
+
+
 # Download the binary
 wget https://dl.enforce.dev/chainctl/latest/chainctl_linux_x86_64
 # wget is the command line equivalent to clicking the download button on a website
