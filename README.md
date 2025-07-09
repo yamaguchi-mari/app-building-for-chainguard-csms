@@ -10,22 +10,13 @@ Bridging the gap between business concerns and technical concerns is valuable to
 
 Immersing in the technical side just a little more makes it much easier to get tha credibility and increase overall Chainguard value without adding more head count.
 
-
-
-Relevant Examples:
-
-Trouble-shooting: [Will Kontizer's Container Security Dashboard](https://github.com/wkonitzer/container-security-dashboard?tab=readme-ov-file#notes--troubleshooting)
-
-
-Conversation's about 
-
 ---
 
 ### Class Goal
 
 Understand how Chainguard factory works
 
-Be familiar with underlying concepts like bach commands, git, docker, package managers, and CI
+Be familiar with underlying concepts like bash commands, git, docker, package managers, and CI
 
 ---
 

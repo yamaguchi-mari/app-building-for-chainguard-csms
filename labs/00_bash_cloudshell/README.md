@@ -253,8 +253,22 @@ sudo               # Raise privileges of User before executing command
 
 - What's the difference between OS-level and app-level package managers?
 - How does Chainguard address application vs OS dependencies?
-- Why is `chroot` relevant for debugging distroless images?
 - What does the `$PATH` variable do?
+
+</details>
+
+<details>
+<summary><strong>(Open Me) Real world examples</strong></summary>
+
+This stuff really does come up:
+
+![image](Dale-Paths-Convo.png?)
+
+[Link](https://chainguard-dev.slack.com/archives/C04PYHWPE1F/p1750880117172019) to internal slack thread
+
+Paste this conversation into ChatGPT and ask the following:
+
+- Please summarize this conversation at a level that a Chainguard person just starting to learn Linux can understand
 
 </details>
 
