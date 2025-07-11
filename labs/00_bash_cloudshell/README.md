@@ -217,7 +217,7 @@ ls -l
 # drwxrwxr-x 2 anthony_sayre anthony_sayre     4096 Jun 24 13:40 test
 
 # Try to run the binary:
-./chainctl_linux_x86_64
+./chainctl_linux_x86_64 --help
 # Did it run? Why or why not?
 
 # The binary we just downloaded does not have any Xs in its permissions
@@ -225,7 +225,10 @@ chmod +x chainctl_linux_x86_64
 
 # Review the binary's permissions after running 'chmod' command:
 ls -l
-# Are there Xs in the pemrissions section of the result? If so then move to the next step:
+# Are there Xs in the pemrissions section of the result? If so then move to the next step
+
+# Verify it runs now
+./chainctl_linux_x86_64 --help
 
 # The path env
 echo $PATH
