@@ -1,6 +1,6 @@
 # 🐧 Chainguard Account Manager Lab: Intro to Linux & Bash
 
-Welcome to your first hands-on lab in Linux and Bash! This guide is tailored for Chainguard account managers who are getting started with the command line. No prior knowledge required.
+Welcome to your first hands-on lab in Linux and Bash! This guide is tailored for Chainguard account managers who are getting started with the command line. No prior knowledge required. These concepts 
 
 By the end of this lab, you will:
 
@@ -72,6 +72,9 @@ It's the same/similar file directory everywhere:
 cd ~
 mkdir chainguard-app-building
 cd ~/chainguard-app-building
+
+# Try the 'echo' command
+echo Hello world
 
 # Create a simple script file with a bash command inside
 echo '#!/bin/bash' > greet.sh
@@ -279,8 +282,9 @@ sudo               # Raise privileges of User before executing command
 <details>
 <summary><strong>(Open Me) Suggested Questions for Further Study</strong></summary>
 
+Context: I am a technical client facing Chainguard rep who is new to Linux, answer the below questions with this in mind
 - What's the difference between OS-level and app-level package managers?
-- How does Chainguard address application vs OS dependencies?
+- How does Chainguard address application dependencies vs OS dependencies?
 - What does the `$PATH` variable do?
 - What is a binary file and how is it different from a normal text file?
 
