@@ -307,4 +307,4 @@ Paste this conversation into ChatGPT and ask the following:
 ---
 
 | Next Lab: [GitHub](/labs/01_github) |
-| 
+|:-----------------------------------:|
