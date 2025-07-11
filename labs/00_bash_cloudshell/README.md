@@ -290,7 +290,7 @@ This stuff really does come up:
 
 Paste this conversation into ChatGPT and ask the following:
 
-- Please summarize this conversation so that a Linux beginner can understand it. Specify the concepts they are discussing and also how they were abel to determine things like symbolic links (and what symbolic links are).
+- Please summarize this conversation so that a Linux beginner can understand it. Specify the concepts they are discussing and also how they were able to determine things like symbolic links (and what symbolic links are).
 </details>
 
 ---
