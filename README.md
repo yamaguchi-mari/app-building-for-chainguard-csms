@@ -1,4 +1,4 @@
-# App Building for Chainguard TSMs
+# App Building for Chainguard CSMs
 
 Purpose of this class material is to soft ramp foundational computer concepts for technical facing Chainguard ICs and managers, in workshop format.
 
