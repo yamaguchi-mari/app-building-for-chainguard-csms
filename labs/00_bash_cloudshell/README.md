@@ -40,7 +40,7 @@ ls
 cat passwd         # View file contents
 cd ~               # Return home
 cd /etc            # Absolute path navigation
-ls -la             # Detailed listing
+ls -l             # Detailed listing
 cd /Users/<your_user_name>  # Return home
 pwd
 ```
@@ -71,7 +71,19 @@ cd ~/chainguard-app-building
 
 # Create a simple script file with a bash command inside
 echo '#!/bin/bash' > greet.sh
+
+# Verify the existence of the new file you just created
+ls
+
+# Verify its contents
+cat greet.sh
+
+# now add more
 echo 'echo "Hello world"' >> greet.sh
+
+# Verify the new addition
+# NOTE: Try the Up Arrow at the terminal prompt to bring up the previos 'cat' command
+cat greet.sh
 
 # View and modify permissions
 ls -l greet.sh
@@ -94,8 +106,17 @@ env
 # Put a variable in your greet.sh script
 echo 'echo " And also hello $MACGUFFIN", aka $USER' >> greet.sh
 
+
+# List contents of ~, this time lets include hidden files
+ls -a
+# There should be a file called .zshrc (hidden files start with ".")
+
+
 # Make a backup copy of your .zshrc file
 cp ~/.zshrc ~/.zshrc.bak
+
+# View contents of .zshrc
+cat ~/.zshrc
 
 # Make a variable persistent
 echo 'export MACGUFFIN=<change me>' >> ~/.zshrc # .zshrc file is hidden in your $HOME directory and runs commands for you
@@ -159,7 +180,7 @@ You probably already installed chainctl on your work laptop using `brew`
 brew install chainctl
 ```
 
-Clients running production systems may not always be able rely on package managers for individual OSs like `brew`.
+Clients running production systems may not always be able to rely on package managers for individual OSs like `brew`.
 
 Let's install a CLI tool without a package manager, using a more universal method: `wget`.
 
@@ -254,6 +275,7 @@ sudo               # Raise privileges of User before executing command
 - What's the difference between OS-level and app-level package managers?
 - How does Chainguard address application vs OS dependencies?
 - What does the `$PATH` variable do?
+- What is a binary file and how is it different from a normal text file?
 
 </details>
 
@@ -268,8 +290,7 @@ This stuff really does come up:
 
 Paste this conversation into ChatGPT and ask the following:
 
-- Please summarize this conversation at a level that a Chainguard person just starting to learn Linux can understand
-
+- Please summarize this conversation so that a Linux beginner can understand it. Specify the concepts they are discussing and also how they were abel to determine things like symbolic links (and what symbolic links are).
 </details>
 
 ---
