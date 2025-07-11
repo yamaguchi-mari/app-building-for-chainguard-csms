@@ -27,6 +27,10 @@ Linux systems organize data in hierarchical directories. Mastering navigation is
 
 ![image](linuxdir2.png?)
 
+Open your terminal:
+
+![image](zshell.png?)
+
 ### Commands: Navigate and Explore
 ```bash
 cd ~               # Ensure you are in your home directory
