@@ -1,101 +1,53 @@
-# GitHub
+# GitHub Lab: Fork & Clone a Repository
 
-*By the end of this lab, you will:*
-1. Setup SSH keys and use them to configure github
-1. Create and clone a new github repo
-1. Commit and push to your new github repo
-1. Clone an existing github repo
-1. Create a new git repo
+## ✅ Goal
+
+By the end of this lab, you will:
+
+1. Set up SSH keys for GitHub  
+2. Fork an existing GitHub repo using the GitHub UI  
+3. Clone your fork locally using Git and SSH  
+4. Make and push commits to your fork  
+> Note: Ensure you are logged into your [GitHub account](https://github.com/login) for this lab
 
 ---
 
-Ensure git is installed on your Mac
+## Module 1: Set up local SSH keys for GitHub
 
-```shell
+```bash
+# Ensure Git is Installed
 git --version
 
-# or
-
+# If not installed
 brew install git
-```
 
-### Set Up a WorkDir
-
-If you have not already, create a directory to house your work for today's class
-
-```shell
+# Prepare Your Workspace
 mkdir -p ~/chainguard-app-building
 cd ~/chainguard-app-building
-```
 
----
-
-### Get Started (Authentication)
-
-Create a new key if necessary
-
-```bash
+# If you don’t have an SSH key yet:
 ssh-keygen
-```
-
-Verify the key was created
-
-```bash
 ls -l ~/.ssh
-```
 
-It should like like this:
-
-```bash
-total ...
--rw------- 1 anthony.sayre  staff 444 Jan  1 22:17 id_rsa
--rw-r--r-- 1 anthony.sayre  staff 127 Jan  1 22:17 id_rsa.pub
-```
-
-OR like this:
-
-```bash
-total 32
--rw-------  1 anthony.sayre  staff  444 Jun  1 22:17 id_ed25519
--rw-r--r--  1 anthony.sayre  staff  127 Jun  1 22:17 id_ed25519.pub
-```
-
-In either case, we want the contents of the `.pub` file:
-
-```bash
+# Get the public key contents:
 cat ~/.ssh/id_rsa.pub
-```
-
-OR:
-
-```bash
+# or your ssh key file might be named like this:
 cat ~/.ssh/id_ed25519.pub
-```
+# Copy the entire contents
 
-
-```
-ssh-ed25519 aBunchOfStuffHere!ZDI1NTE5AAA.........@AnthonySayres-MacBook-Pro.local
 ```
 
 ---
 
-## Add Your SSH Key to GitHub
+Paste the key contents to your GitHub account:
 
-- For git/GitHub repo cloning, push/pull updates etc... 
+- Go to [GitHub SSH Keys Settings](https://github.com/settings/keys)
 
-Adding your SSH key to GitHub allows you to easily authenticate with github.com and interact with repositories using your unique identity.
+- Click **“New SSH key”**, a new form will appear with a field for pasting in your key
 
-Log in to [GitHub](https://github.com/login.), navigate to the [SSH Keys tab of your profile settings](https://github.com/settings/keys), click **New SSH key** button and add the contents of your `.pub` file as a new key.
-  - Optional, but recommended for class:
-    - Set the title to `app bldg for cs` and give the key an expiration
-    - Alternatively, you can set the title to `your_name@cloudshell` and choose an expiration of your liking (or not)
+- Paste the key, name it something like `app-bldg`, and add an expiration
 
 ![image](ssh_key2.png?)
-
-
-Click 'Add new SSH key' button
-
-You should now be able to use your local Git with your GitHub account
 
 Test the connection:
 
@@ -103,81 +55,115 @@ Test the connection:
 ssh -T git@github.com
 ```
 
-If you see the below message, you've succeeded in SSH integration with GitHub:
+If successful, you’ll see:
 
-```
-Hi <GH account name> You've successfully authenticated, but GitHub does not provide shell access.
-```
+"Hi <your-username>! You've successfully authenticated..."
 
-
-
-## Create a Personal Access Token (for API)
-
-While an SSH key will allow you to interact with repositories on github.com, an access token will allow you to do alot more than that uisng the GitHub API. 
-
-Again, ensure you are logged into GitHub, and navigate to [personal access token](https://github.com/settings/tokens) page. 
-
-**'Personal access tokens'** --> **'Generate new token (classic)'** from the dropdown
-
-![image](classic-api-token.png?)
-
-Choose the below permissions for the token
-
-> IMPORTANT: set an early expiration date for this token (for security hygiene purposes)
-
-![image](classic-api-token-settings.png?)
-
-Scroll to the bottom and click the 'Generate token' button
-
-New token will generate, copy it to a text file.
-
-> Note: You will only see this token once in the GH UI
-
-```bash
-open -a TextEdit 
-```
-
-Add **your** token to your `~/.zshrc`
-
-To use the MacOS text editor for this:
-
-```bash
-open -a TextEdit ~/.zshrc
-```
-
-Add the following at the bottom of the file and save:
-
-```bash
-# Don't add this token.  This is Teacher's.  Add YOUR token.
-export GITHUB_API_TOKEN="ghp_vzN...ycc"
-```
-
-Load your update and make sure you can see the token:
-
-```bash
-source ~/.zshrc
-echo $GITHUB_API_TOKEN
-```
-
-You should see this:
-
-```
-source ~/.zshrc
-echo $GITHUB_API_TOKEN
-ghp_vzNjcsofhafeo668qsl..ycc
-```
-> Note: You won't see this exact value; you'll see YOUR token, right?  :)
-
-### Once you verify the token is captured in the variable you have completed this step
-
+### Module complete
 
 ---
 
-### GitHub API
+## Module 2: Fork a Repository via GitHub UI
 
-Use the GitHub API to create a new repository
+1. Visit this repo: [https://github.com/Sayre-Tnunu/app-building-for-chainguard-csms](https://github.com/Sayre-Tnunu/app-building-for-chainguard-csms)
+2. Click the **Fork** button (top-right of the page)
+3. Choose your personal account as the destination
+
+Once the fork completes, you will be taken to **your own copy** of the repo (e.g. `yourusername/app-building-for-chainguard-csms`)
+
+---
+
+## Module 3: Clone Your Fork via SSH
+
+Return to your fork’s page, click the green **“Code”** button, select **SSH**, and copy the link (e.g. `git@github.com:yourusername/app-building-for-chainguard-csms.git`)
+
+Then:
 
 ```bash
+cd ~/chainguard-app-building
+
+# Clone your copy of the repo to your local environment
+git clone git@github.com:yourusername/app-building-for-chainguard-csms.git
+
+cd app-building-for-chainguard-csms
+
+# Verify your working directory:
+pwd
+ls
+
+```
+
+---
+
+## Module 4: Make and push commits to your fork 
+
+Set your Git identity:
+
+
+```bash
+# Replace "you@example.com" and "Your Name" with your actual email and name
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+# Create a file
+echo "hello from my fork" > demofile
+
+# Track the file
+git add demofile
+
+# Commit
+git commit -m "add demofile to test fork"
+
+# Push it!
+git push
+```
+
+Check your fork on GitHub—you should see the file appear.
+
+---
+
+## Optional: Create a Pull Request
+
+If you'd like to contribute your changes back to the original repo:
+
+1. Go to your fork on GitHub
+2. Click “Contribute”
+3. Open a pull request
+
+## End of Lab
+
+---
+
+## Extra Credit: Create a Repo Using the GitHub API
+
+You can also create a GitHub repository programmatically using the GitHub API. This is useful for automation or scripting use cases.
+
+### Step 1: Create a GitHub Personal Access Token
+
+- Log in to [GitHub](https://github.com/login)
+- Navigate to [https://github.com/settings/tokens](https://github.com/settings/tokens)
+- Click **"Generate new token (classic)"**
+- Select the `repo` scope and set a short expiration
+- Copy the token (you will only see it once)
+
+### Step 2: Store the token as an environment variable
+
+```bash
+# Open your shell config (e.g., ~/.zshrc)
+open -a TextEdit ~/.zshrc
+
+# Add this line to the end, using your actual token
+export GITHUB_API_TOKEN="ghp_YourActualTokenHere"
+
+# Apply the update
+source ~/.zshrc
+```
+
+### Step 3: Use curl to create a new GitHub repo
+
+```bash
+cd ~/chainguard-app-building
+
 curl \
   -X POST \
   -H "Authorization: token ${GITHUB_API_TOKEN}" \
@@ -188,318 +174,18 @@ curl \
     "auto_init": true,
     "private": false
   }' \
-  | tee ~/chainguard-app-building/repo_metadata.json
+  | tee repo_metadata.json
 ```
 
-
- Piping that `curl` output to `tee` displays the results in the terminal as well as storing them in the `repo_metadata.json` file.  (We're going to use this file **a lot** throughout the rest of this class.) 
-
-`jq` is a very handy tool for parsing and anlyzing the contents of json files. It does not come native in macos so we'll download it using the Mac's package manager called `homebrew`:
+### Step 4: Clone your new repo
 
 ```bash
+# If you have jq installed:
 brew install jq
-```
-
-With `jq`, the results are much more readable:
-
-```bash
-cat ~/chainguard-app-building/repo_metadata.json | jq
-# or
-cat ~/chainguard-app-building/repo_metadata.json | jq '.ssh_url'
-```
-
-Clone the repository locally:
-
-```bash
-cd ~/chainguard-app-building
 
 git clone $(jq -r '.ssh_url' repo_metadata.json)
 
 cd mywebserver
 ```
 
-> Note: Now is a good time to ensure you did all this right. Use `ls` and `pwd`
-
-Pwd command:
-```bash
-pwd
-```
-
-Should yield this result:
-
-`/Users/<your.user.name>/chainguard-app-building`
-
-Ls command:
-
-```bash
-ls
-```
-
-Should yield this result:
-
-
-`mywebserver		repo_metadata.json`
-
----
-
-Q: What did we just do?
-
-A: We created a new repo at GitHub using one automation friendly method (API). Then cloned the new empty repo locally using another automation friendly method (SSH)
-
-
-Method 1: API to create/delete/edit
-![image](create_repo_github.png?)
-
-Method 2: Git and SSH to  clone/push/pull
-![image](git_clone_repo_github.png?)
-
----
-
-### Working With Your Repo
-
-##### The One Thing
-
-When working with a Git repository, there's a very standard workflow:
-
-1. Change files
-  - Make any changes you want to any files you want (in a git initiatied folder)
-  - Small batches of changes are better than big batches
-2. Stage files
-  - `git add ...`
-  - This allows you to select which files you want to include in your next commit
-3. Commit files
-  - `git commit -m "commit notes..."`
-4. Push commit
-  - `git push`
-
----
-
-##### Identify yourself
-
-Make the following global settings before making your first commit; use your own email and name:
-
-```bash
-# Run these commands to set up git
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
-```
-(git requires that each user committing changes is identified)
-
-##### Playing with git
-
-Make your first commit:
-
-```bash
-# Get to the right spot
-cd ~/chainguard-app-building/mywebserver
-
-# Create a new file
-echo "hello world" > demofile
-
-# Verify the change
-cat demofile
-
-# Check the status
-git status
-
-# Track the file
-git add demofile
-
-# Make a commit
-git commit -m 'add hello world'
-```
-
-Make your first (ever) mistake
-
-```bash
-# Make a change
-echo "this is a mistake" > demofile
-cat demofile
-git add demofile
-git commit -m 'accidentally break the file'
-```
-
-You have everything locally, but you want to push it to GitLab so...
-- You have a backup
-- You can collaborate with others  
-
-View your commit history, then store all commits on GitLab:
-
-```bash
-git log
-git push
-```
-
-Navigate to your project and check out your file:
-
-```bash
-jq -r '.web_url' ~/chainguard-app-building/repo_metadata.json
-```
-
-^ Open the resulting URL in a browser
-
-We messed up our file!  Let's fix it:
-
-```bash
-echo "Hello World" > demofile
-cat demofile
-git add demofile
-git commit -m 'fix the file'
-git push
-```
-
-Just for fun, let's delete (make sure your `git push` worked!) and recover our local copy of the file...
-
-```bash
-ls -l
-rm demofile
-ls -l
-git checkout demofile
-ls -l
-```
-
----
-
-### Create Your Own Git Project for local use
-
-```bash
-mkdir ~/chainguard-app-building/work-dir
-cd ~/chainguard-app-building/work-dir
-git init
-```
-
-The `git init` line tells git to start tracking this folder as a repository.  It doesn't matter that there's no remote GitLab repository.  You can still manage branches and commits locally.
-
----
-
-### Git Clone this class material
-
-
-
-
-### Clone an insecure website
-
-```shell
-git clone git@github.com:Sayre-Tnunu/app-building-for-chainguard-tsms.git ~/chainguard-app-building/goof
-```
-
-[NOTE]: Notice the above version of this git clone command has an extra piece added to the end ( ~/juiceshop).
-You can tell git where to put the new repo you are cloning, if you don't want it to be in your current working directory. 
-
-### Create a new empty repo in GitLab for it
-
-```bash
-curl \
-  -X POST \
-  -H "PRIVATE-TOKEN: ${GITLAB_API_TOKEN}" \
-  -d "name=Goof" \
-  -d "initialize_with_readme=false" \
-  -d "default_branch=main" \
-  "https://github.com/api/v4/projects" \
-  | tee ~/chainguard-app-building/repo_metadata_goof.json
-```
-
-> **Q:** What did the **tee** command above just do?
-
-Go to your GitHub UI and find the empty repo you just created
-
-### Redirect the recently cloned GitHub repo to your newly created GitHub repo 
-
-```shell
-cd ~/chainguard-app-building/goof/
-
-# check out the contents
-ls
-
-# verify remote repo origin where the this came from (should show a GitHub repo)
-git remote -v
-
-# change remote repo origin 
-git remote set-url origin $(jq -r '.ssh_url_to_repo' ~/chainguard-app-building/repo_metadata_goof.json )
-
-# reverify where the repo is now set to push to (should now show a GitHub repo instead of GitHub) 
-git remote -v
-
-# push it!
-git push
-
-# Go to your GitLab Web UI to verify update
-```
-
-
-
----
-
-
-### Self-Study and/or Extra Credit
-
-> **Q:** Wait, what if I'm not sure what I'm commiting?
-
-> **A:**`git diff` command
-
-```bash
-cat demofile
-echo "replacement" > demofile
-cat demofile
-echo "enhancement" >> demofile
-cat demofile
-git diff
-```
-
----
-
-
-Run tree command to get an overview
-
-`tree -F -L 2 ~/chainguard-app-building` if you have `tree` installed.
-
-(To install `tree` on Mac: `brew install tree`)
-
-If you're a really good instruction-follower, your `~/chainguard-app-building` directory tree should look something like this:
-
-```
-/Users/anthonysayre/chainguard-app-building/
-├── goof/
-│   ├── Dockerfile
-│   ├── README.md
-│   ├── app.js
-│   ├── app.json
-│   ├── db.js
-│   ├── docker-compose.yml
-│   ├── exploits/
-│   ├── node_modules/
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── public/
-│   ├── routes/
-│   ├── utils.js
-│   └── views/
-├── mywebserver/
-│   └── deploy/
-└── repo_metadata_goof.json
-```
-
----
-`git diff` screenshot example:
-
-
-- **green lettering** = added text
-- **red lettering** = deleted text
-
-![image](git-diff-example.png?)
-
----
-
-### Further reading
-  - [Gitlab API Documentation](https://docs.gitlab.com/ee/api/)
-  - [Basic git terminology](http://juristr.com/blog/2013/04/git-explained/#Terminology)
-  - [More advanced terminology](https://cocoadiary.wordpress.com/2016/08/17/git-terminologyglossary/)
-  - [Revert a commit](https://git-scm.com/docs/git-revert.html) (a.k.a. Undo; restoring from backup)
-  - [Branching and merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
-  - [Git best practices](http://kentnguyen.com/development/visualized-git-practices-for-team/) (There are a lot of these.  Read critically and pick what works best in your environment.)
-  - [Stashing](https://git-scm.com/book/en/v1/Git-Tools-Stashing)
-
----
-
-| Previous: [Bash](/labs/00_bash_cloudshell) | Next: [Chainguard and CI](/labs/01a_chainguard_ci) |
-|-------------------------------------------:|:---------------------------------------|
+Congratulations! You now have a repo created and cloned entirely through automation!

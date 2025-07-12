@@ -34,7 +34,7 @@ Open your terminal:
 ### Commands: Navigate and Explore
 ```bash
 cd ~               # Ensure you are in your home directory
-pwd                # Show current directory
+pwd                # Print working directory
 cd ../..           # Move up two levels
 pwd                # Verify location
 ls                 # List contents
