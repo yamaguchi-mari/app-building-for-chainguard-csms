@@ -134,7 +134,10 @@ If you'd like to contribute your changes back to the original repo:
 
 ---
 
-## Extra Credit: Create a Repo Using the GitHub API
+<details>
+<summary><strong>Extra Credit: Create a Repo Using the GitHub API</strong></summary>
+
+## Create a Repo Using the GitHub API
 
 You can also create a GitHub repository programmatically using the GitHub API. This is useful for automation or scripting use cases.
 
@@ -143,7 +146,13 @@ You can also create a GitHub repository programmatically using the GitHub API. T
 - Log in to [GitHub](https://github.com/login)
 - Navigate to [https://github.com/settings/tokens](https://github.com/settings/tokens)
 - Click **"Generate new token (classic)"**
+
+![image](classic-api-token.png?)
+
 - Select the `repo` scope and set a short expiration
+
+![image](classic-api-token-settings.png?)
+
 - Copy the token (you will only see it once)
 
 ### Step 2: Store the token as an environment variable
@@ -189,3 +198,5 @@ cd mywebserver
 ```
 
 Congratulations! You now have a repo created and cloned entirely through automation!
+
+</details>
