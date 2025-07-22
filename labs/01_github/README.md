@@ -1,6 +1,6 @@
 # GitHub Lab: Fork & Clone a Repository
 
-## ✅ Goal
+## Goal
 
 By the end of this lab, you will:
 
@@ -18,7 +18,7 @@ By the end of this lab, you will:
 # Ensure Git is Installed
 git --version
 
-# If not installed
+# If not...
 brew install git
 
 # Prepare Your Workspace

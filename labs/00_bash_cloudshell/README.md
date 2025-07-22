@@ -1,6 +1,6 @@
 # 🐧 Chainguard Account Manager Lab: Intro to Linux & Bash
 
-Welcome to your first hands-on lab in Linux and Bash! This guide is tailored for Chainguard account managers who are getting started with the command line. No prior knowledge required. These concepts 
+Welcome to your first hands-on lab in Linux and Bash! This guide is tailored for Chainguard account managers who are getting started with the command line. No prior knowledge required. You'll see these concepts repeated in other higher level technology like containers, CI scripts, package managers, etc.
 
 By the end of this lab, you will:
 
@@ -26,6 +26,18 @@ Linux systems organize data in hierarchical directories. Mastering navigation is
 
 
 ![image](linuxdir2.png?)
+
+| Directory | Purpose                                         |
+| --------- | ----------------------------------------------- |
+| `/`       | Root 
+| `/bin`    | Essential command binaries                      |
+| `/sbin`   | System administration binaries                  |
+| `/etc`    | Configuration files                             |
+| `/home or /Users`   | User home directories                           |
+| `/var`    | Variable data like logs                         |
+| `/usr`    | Secondary hierarchy for user-installed software |
+
+---
 
 Open your terminal:
 
