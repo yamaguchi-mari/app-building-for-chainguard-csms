@@ -43,9 +43,10 @@ Open your terminal:
 
 ![image](zshell.png?)
 
+
 ### Commands: Navigate and Explore
 ```bash
-cd ~               # Ensure you are in your home directory
+cd ~               # Change directory - Ensure you are in your home directory
 pwd                # Print working directory
 cd ../..           # Move up two levels
 pwd                # Verify location
@@ -56,7 +57,7 @@ ls
 cat passwd         # View file contents
 cd ~               # Return home
 cd /etc            # Absolute path navigation
-ls -l             # Detailed listing
+ls -l              # Detailed listing
 cd /Users/<your_user_name>  # Return home
 pwd
 ```
@@ -82,7 +83,7 @@ It's the same/similar file directory everywhere:
 ### Commands: Creating and Managing Files
 ```bash
 cd ~
-mkdir chainguard-app-building
+mkdir chainguard-app-building 
 cd ~/chainguard-app-building
 
 # Try the 'echo' command
