@@ -59,11 +59,16 @@ cd ~               # Return home
 cd /etc            # Absolute path navigation
 ls -l              # Detailed listing
 cd /Users/<your_user_name>  # Return home
-pwd
+pwd                # Verify where you are once more
 ```
 **Tip:** Use `<Tab>` for path autocompletion.
 
 Q: How could you read the passwd file in the /etc directory without having to navigate to the /etc directory?
+
+```bash
+mkdir chainguard-app-building # Make a new directory
+ls -l chainguard-app-building # Verify your new folder is created
+```
 
 > End of module when the above question is answered
 
@@ -82,9 +87,8 @@ It's the same/similar file directory everywhere:
 
 ### Commands: Creating and Managing Files
 ```bash
-cd ~
-mkdir chainguard-app-building 
-cd ~/chainguard-app-building
+# Change your user location to your directory
+cd ~/chainguard-app-building 
 
 # Try the 'echo' command
 echo Hello world
