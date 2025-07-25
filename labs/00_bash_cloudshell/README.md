@@ -65,6 +65,8 @@ pwd                # Verify where you are once more
 
 Q: How could you read the passwd file in the /etc directory without having to navigate to the /etc directory?
 
+That's navigation, now lets make something...
+
 ```bash
 mkdir chainguard-app-building # Make a new directory
 ls -l chainguard-app-building # Verify your new folder is created
