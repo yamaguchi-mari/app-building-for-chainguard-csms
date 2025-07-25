@@ -204,7 +204,7 @@ Clients running production systems may not always be able to rely on package man
 
 Let's install a CLI tool without a package manager, using a more universal method: `wget`.
 
-But we don't want to do it in our local environment (we already have chainctl installed there).
+But we don't want to do it in our local environment (we already have chainctl installed there, right?).
 
 Go to [Google Cloud Shell](https://console.cloud.google.com/) (authentication w/ Ubikey required)
 
@@ -301,20 +301,6 @@ Context: I am a technical client facing Chainguard rep who is new to Linux, answ
 - What does the `$PATH` variable do?
 - What is a binary file and how is it different from a normal text file?
 
-</details>
-
-<details>
-<summary><strong>(Open Me) Real world examples</strong></summary>
-
-This stuff really does come up:
-
-![image](Dale-Paths-Convo.png?)
-
-[Link](https://chainguard-dev.slack.com/archives/C04PYHWPE1F/p1750880117172019) to internal slack thread
-
-Paste this conversation into ChatGPT and ask the following:
-
-- Please summarize this conversation so that a Linux beginner can understand it. Specify the concepts they are discussing and also how they were able to determine things like symbolic links (and what symbolic links are).
 </details>
 
 ---
