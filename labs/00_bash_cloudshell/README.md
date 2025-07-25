@@ -70,7 +70,7 @@ mkdir chainguard-app-building # Make a new directory
 ls -l chainguard-app-building # Verify your new folder is created
 ```
 
-> End of module when the above question is answered
+> End of module when you've verified the new directory is created
 
 ---
 
