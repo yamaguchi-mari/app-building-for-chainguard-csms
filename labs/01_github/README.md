@@ -200,3 +200,6 @@ cd mywebserver
 Congratulations! You now have a repo created and cloned entirely through automation!
 
 </details>
+
+| Previous: [Linux/Bash](/labs/00_bash_cloudshell) | Next: [Chainguard in CI](/labs/01a_chainguard_ci) |
+|-------------------------------------------:|:--------------------------------------------------|
