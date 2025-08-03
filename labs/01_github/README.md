@@ -12,7 +12,7 @@ By the end of this lab, you will:
 
 ---
 
-## Module 1: Set up local SSH keys for GitHub
+## Module 1: Set up local SSH keys for integrating Git with GitHub
 
 ```bash
 # Ensure Git is Installed
@@ -59,7 +59,7 @@ If successful, you’ll see:
 
 "Hi <your-username>! You've successfully authenticated..."
 
-### Module complete
+#### Module complete
 
 ---
 
@@ -70,6 +70,9 @@ If successful, you’ll see:
 3. Choose your personal account as the destination
 
 Once the fork completes, you will be taken to **your own copy** of the repo (e.g. `yourusername/app-building-for-chainguard-csms`)
+
+
+#### Module complete
 
 ---
 
@@ -98,6 +101,8 @@ cd app-building-for-chainguard-csms
 ls 
 
 ```
+
+#### Module complete
 
 ---
 
@@ -144,12 +149,28 @@ https://github.com/yourusername/app-building-for-chainguard-csms
 > open "$(git remote get-url origin | sed -E 's#^git@([^:]+):#https://\1/#; s#\.git$##')"
 > ```
 
-End of module when you have verified your new file is added to the rempte repo
+
+Should look similar to this:
+
+![image](verifynewfile.png?)
+
+
+End of module when you have verified your new file is added to the remote repo
+
+#### Module complete
 
 ---
 
+
 <details>
-<summary><strong>Extra Credit: Create a Repo Using the GitHub API</strong></summary>
+<summary><strong>Extra Credit: Merge your changed fork back in to the Main</strong></summary>
+
+
+
+</details>
+
+<details>
+<summary><strong>Extra Extra Credit: Create a Repo Using the GitHub API</strong></summary>
 
 ## Create a Repo Using the GitHub API
 
