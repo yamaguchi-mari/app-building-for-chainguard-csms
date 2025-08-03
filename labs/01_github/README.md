@@ -117,15 +117,18 @@ git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
 # Create a file
-echo "hello from my fork" > demofile
+echo "hello from my fork $MACGUFFIN" > demofile
+
+# Review the file
+cat demofile
 
 # Track the file
 git add demofile
 
 # Commit
-git commit -m "add demofile"
+git commit -m "add demofile $MACGUFFIN"
 
-# Push it!
+# Push!
 git push
 ```
 
@@ -146,6 +149,7 @@ https://github.com/yourusername/app-building-for-chainguard-csms
 > Enter this command in the terminal:
 
 > ```bash
+> # Use open command + git command + pipe + sed to open the web browser with command line:
 > open "$(git remote get-url origin | sed -E 's#^git@([^:]+):#https://\1/#; s#\.git$##')"
 > ```
 
@@ -165,7 +169,35 @@ End of module when you have verified your new file is added to the remote repo
 <details>
 <summary><strong>Extra Credit: Merge your changed fork back in to the Main</strong></summary>
 
+Ensure you are in your development environment (the clone of the fork you created), 
 
+In a web browser, ensure that you have your fork of the repo open in GitHub. Remember you can open the repo from the command line again:
+
+
+```bash
+# Ensure you are in the correct repo:
+cd ~/chainguard-app-building/app-building-for-chainguard-csms/
+
+# Use open command + git command + pipe + sed to open the web browser with command line:
+open "$(git remote get-url origin | sed -E 's#^git@([^:]+):#https://\1/#; s#\.git$##')"
+```
+
+In the GitHub repo, find the 'Contribute' dropdown (upper-left), open the dropdown, review branch commit info, click 'Open pull request' button:
+
+![image](merge1.png?)
+
+Review the branch info, click the Pull request dropdown, ensure `Create draft pull request` is chosen:
+
+![image](createdraftpr.png?)
+
+Click `Draft pull request` button:
+![image](createdraftpr2.png?)
+
+You are done with the extra credit when you have created the pull request. 
+
+A new PR should now exist back at the orinigal version of the repo of this class material with your unique file in it!
+
+#### End of extra credit module
 
 </details>
 
