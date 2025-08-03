@@ -130,11 +130,15 @@ Check your fork on GitHub—you should see the file appear. Open your browser to
 https://github.com/yourusername/app-building-for-chainguard-csms
 ```
 
-> [NOTE]: you can actually open the web address for the GitHub address of this cloned repo from bash. Make sure you are in your locally cloned copy of the repo
+> [NOTE]: You can actually open the web address for your remote repo from the command line. 
+
+> Make sure you are in your local copy of the repo:
 
 > ```bash
 > cd ~/chainguard-app-building/app-building-for-chainguard-csms
 >```
+
+> Enter this command in the terminal:
 
 > ```bash
 > open "$(git remote get-url origin | sed -E 's#^git@([^:]+):#https://\1/#; s#\.git$##')"
