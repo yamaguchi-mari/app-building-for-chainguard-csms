@@ -16,13 +16,13 @@ By the end of this lab, you will:
 Linux systems organize data in hierarchical directories. Mastering navigation is essential.
 
 ### Key Terms
-- **Directory**: Folder on a system (`/etc`, `/home`)
+- **Directory/LFHS**: Folder on a system (`/etc`, `/home`)  - common name for the Linux FileSystem Hierarchy Structure
 - **Path**: Location of a file or directory
 - **Home (`~`)**: Your personal directory
 
 ---
 
-[The Linux File Hierarchy Structure (LFHS):](https://www.linuxtrainingacademy.com/linux-directory-structure-and-file-system-hierarchy/)
+[The Linux File Hierarchy Structure (LFHS) A.K.A. the Linux directory :](https://www.linuxtrainingacademy.com/linux-directory-structure-and-file-system-hierarchy/)
 
 
 ![image](linuxdir2.png?)

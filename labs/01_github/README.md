@@ -85,11 +85,17 @@ cd ~/chainguard-app-building
 # Clone your copy of the repo to your local environment
 git clone git@github.com:yourusername/app-building-for-chainguard-csms.git
 
+# Verify a new subirectory is now visible:
+ls -l
+
+# Result should look like this:
+# drwxr-xr-x  7 anthony.sayre  staff  224 Aug  3 12:45 app-building-for-chainguard-csms
+
+# Navigate to the newly cloned directory (folder)
 cd app-building-for-chainguard-csms
 
-# Verify your working directory:
-pwd
-ls
+# What subfolders and files are inside the app-building-for-chainguard-csms folder?
+ls 
 
 ```
 
@@ -101,7 +107,7 @@ Set your Git identity:
 
 
 ```bash
-# Replace "you@example.com" and "Your Name" with your actual email and name
+# Replace "you@example.com" and "Your Name" with your actual email and name (doesn't have to be a real email)
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
@@ -112,25 +118,29 @@ echo "hello from my fork" > demofile
 git add demofile
 
 # Commit
-git commit -m "add demofile to test fork"
+git commit -m "add demofile"
 
 # Push it!
 git push
 ```
 
-Check your fork on GitHub—you should see the file appear.
+Check your fork on GitHub—you should see the file appear. Open your browser to this address
 
----
+```http
+https://github.com/yourusername/app-building-for-chainguard-csms
+```
 
-## Optional: Create a Pull Request
+> [NOTE]: you can actually open the web address for the GitHub address of this cloned repo from bash. Make sure you are in your locally cloned copy of the repo
 
-If you'd like to contribute your changes back to the original repo:
+> ```bash
+> cd ~/chainguard-app-building/app-building-for-chainguard-csms
+>```
 
-1. Go to your fork on GitHub
-2. Click “Contribute”
-3. Open a pull request
+> ```bash
+> open "$(git remote get-url origin | sed -E 's#^git@([^:]+):#https://\1/#; s#\.git$##')"
+> ```
 
-## End of Lab
+End of module when you have verified your new file is added to the rempte repo
 
 ---
 
