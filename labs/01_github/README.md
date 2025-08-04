@@ -12,7 +12,7 @@ By the end of this lab, you will:
 
 ---
 
-## Module 1: Set up local SSH keys for integrating Git with GitHub
+## Modue 00: Ensure git is installed locally and configured
 
 ```bash
 # Ensure Git is Installed
@@ -21,12 +21,33 @@ git --version
 # If not...
 brew install git
 
+# If you had to install this for the first time, then you need to do this next step: Replace "you@example.com" and "Your Name" with your actual email and name (doesn't have to be a real email)
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+# Verify the values are 
+git config --get user.email
+git config --get user.name
+```
+
+If you see the email and user name you entered, you are done with this module
+
+#### Module complete
+
+
+## Module 1: Set up local SSH keys for integrating Git with GitHub
+
+```bash
+
 # Prepare Your Workspace
 mkdir -p ~/chainguard-app-building
 cd ~/chainguard-app-building
 
 # If you don’t have an SSH key yet:
 ssh-keygen
+# Step through the questions it asks
+
+# Check out the files it created:
 ls -l ~/.ssh
 
 # Get the public key contents:
@@ -112,10 +133,6 @@ Set your Git identity:
 
 
 ```bash
-# Replace "you@example.com" and "Your Name" with your actual email and name (doesn't have to be a real email)
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
-
 # Create a file
 echo "hello from my fork $MACGUFFIN" > demofile
 
