@@ -121,6 +121,12 @@ cd app-building-for-chainguard-csms
 # What subfolders and files are inside the app-building-for-chainguard-csms folder?
 ls 
 
+# Now check out the hidden folder!
+ls -a
+
+# See what's inside the hidden folder
+ls .git
+
 ```
 
 #### Module complete
@@ -139,7 +145,10 @@ echo "hello from my fork $MACGUFFIN" > demofile
 # Review the file
 cat demofile
 
-# Track the file
+# Check to see if the git program noticed the new file
+git status
+
+# Tell git to start tracking the new file
 git add demofile
 
 # Commit
