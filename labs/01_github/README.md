@@ -147,14 +147,19 @@ cat demofile
 
 # Check to see if the git program noticed the new file
 git status
+# the new file should display in red
 
 # Tell git to start tracking the new file
 git add demofile
 
-# Commit
+# Check status again
+git status
+# The new file should now disoplay in green (git is now tracking the file)
+
+# Commit (make a local back up of your changes)
 git commit -m "add demofile $MACGUFFIN"
 
-# Push!
+# Push! (send the new local commit of your repo to your remote repo in GitHub!)
 git push
 ```
 
