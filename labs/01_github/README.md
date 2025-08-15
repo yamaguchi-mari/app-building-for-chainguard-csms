@@ -198,7 +198,7 @@ End of module when you have verified your new file is added to the remote repo
 
 
 <details>
-<summary><strong>Extra Credit: Merge your changed fork back in to the Main</strong></summary>
+<summary><strong>Extra Credit: Merge your changed fork back to the instructor's version of the repo</strong></summary>
 
 Ensure you are in your development environment (the clone of the fork you created), 
 
