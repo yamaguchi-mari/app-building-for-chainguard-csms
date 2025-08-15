@@ -28,6 +28,11 @@ git config --global user.name "Your Name"
 # Verify the values are 
 git config --get user.email
 git config --get user.name
+
+# Prepare Your Workspace
+mkdir -p ~/chainguard-app-building
+cd ~/chainguard-app-building
+
 ```
 
 If you see the email and user name you entered, you are done with this module
@@ -38,11 +43,6 @@ If you see the email and user name you entered, you are done with this module
 ## Module 1: Set up local SSH keys for integrating Git with GitHub
 
 ```bash
-
-# Prepare Your Workspace
-mkdir -p ~/chainguard-app-building
-cd ~/chainguard-app-building
-
 # If you don’t have an SSH key yet:
 ssh-keygen
 # Step through the questions it asks
